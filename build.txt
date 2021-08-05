@@ -1,0 +1,3 @@
+displayName = Elemental Hearts
+author = Vincent Jenei (Lite#4249)
+version = 0.1
