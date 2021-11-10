@@ -1,1 +1,12 @@
-Elemental Hearts is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+A rewritten classic mod - Elemental Hearts - adds in numerous consumable life crystals crafted using the various elements found across the game. 
+
+	Quality > Quantity
+	Great addition to any modded playthrough.
+	Gives a use for leftover/extra blocks and ores, without being unbalanced.
+	Spreads with progression
+
+
+Changelog:
+
+1.0
+	A complete rewrite of the old 1.3 classic. New repo, same mod. Drastically changing the codebase, incorporating a more modular design with functionality in mind. Void of the numerous bugs that plagued the old mod, you guys know what I'm referencing.
