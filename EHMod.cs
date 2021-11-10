@@ -2,7 +2,7 @@ using Terraria.ModLoader;
 
 namespace ElementalHeartsMod
 {
-	public class ElementalHeartsMod : Mod
+	public class EHMod : Mod
 	{
 	}
 }
