@@ -1,10 +1,13 @@
 using System;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using Terraria.ModLoader;
 
 namespace ElementalHeartsMod
 {
-	public class EHMod : Mod
-	{
+    public class EHMod : Mod
+    {
         public override void Load()
         {
             Hearts EHInit = new Hearts { };
@@ -16,7 +19,8 @@ namespace ElementalHeartsMod
             base.Load();
         }
     }
-    public class Hearts : ICloneable
+    [Serializable]
+    public class Hearts
     {
 
         public void Boss(Mod mod)
@@ -32,10 +36,10 @@ namespace ElementalHeartsMod
         {
             const string pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/";
 
-
-            mod.AddContent(new EHBase("Amber Heart", "amber", 1, 1, pathPrefix + "AmberHeart").cClone());
-            mod.AddContent(new EHBase("Amethyst Heart", "amethyst", 1, 1, pathPrefix + "AmethystHeart").cClone());
-            mod.AddContent(new EHBase("Boreal Heart", "boreal", 1, 1, pathPrefix + "BorealHeart").cClone());
+            
+            mod.AddContent(EHTools.CreateDeepCopy(new EHBase("Amber Heart", "amber", 1, 1, pathPrefix + "AmberHeart")));
+            mod.AddContent(EHTools.CreateDeepCopy(new EHBase("Amethyst Heart", "amethyst", 1, 1, pathPrefix + "AmethystHeart")));
+            mod.AddContent(EHTools.CreateDeepCopy(new EHBase("Boreal Heart", "boreal", 1, 1, pathPrefix + "BorealHeart")));
 
             /*
             mod.AddContent(new EHBase("Bubble Heart", "bubble", 1, 1, pathPrefix + "BubbleHeart"));
@@ -52,14 +56,18 @@ namespace ElementalHeartsMod
             mod.AddContent(new EHBase("Dynasty Heart", "dynasty", 1, 1, pathPrefix + "DynastyHeart"));
             */
         }
-        public static string hName()
+    }
+    public static class EHTools
+    {
+        public static T CreateDeepCopy<T>(T obj)
         {
-            return "test";
-        }
-
-        public object Clone()
-        {
-            return MemberwiseClone();
+            using (var ms = new MemoryStream())
+            {
+                IFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(ms, obj);
+                ms.Seek(0, SeekOrigin.Begin);
+                return (T)formatter.Deserialize(ms);
+            }
         }
     }
 }

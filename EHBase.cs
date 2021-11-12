@@ -5,8 +5,9 @@ using Terraria.ModLoader;
 
 namespace ElementalHeartsMod
 {
-    public class EHBase : ModItem, ICloneable
-    {            
+    [Serializable]
+    public class EHBase : ModItem
+    {
         public EHBase(string name, string tag, int bonus, int rarity, string texturePath)
         {
             this.name = name;
@@ -73,17 +74,6 @@ namespace ElementalHeartsMod
             {
                 Main.NewText(player.GetModPlayer<EHTracker>().used[tag]);
             }
-        }
-
-        public EHBase cClone()
-        {
-            var clone = (EHBase)MemberwiseClone();
-            return clone;
-        }
-
-        object ICloneable.Clone()
-        {
-            throw new NotImplementedException();
         }
     }
 }
