@@ -5,9 +5,8 @@ using Terraria.ModLoader;
 namespace ElementalHeartsMod
 {
     public class EHBase : ModItem
-    {      
-       
-        public EHBase(string name = "Dirt Heart", string tag = "dirt", int bonus = 1, int rarity = 1, string texturePath = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/DirtHeart") : base()
+    {            
+        public EHBase(string name, string tag, int bonus, int rarity, string texturePath)
         {
             this.name = name;
             this.tag = tag;
