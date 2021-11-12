@@ -1,12 +1,11 @@
-﻿using Terraria.ModLoader;
+﻿using System.Collections.Generic;
+using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
 namespace ElementalHeartsMod
 {
     public class EHTracker : ModPlayer
     {
-        //PreHardmode
-        public int Dirt;
-
+        public IDictionary<string, int> used = new Dictionary<string, int>();
     }
 }
