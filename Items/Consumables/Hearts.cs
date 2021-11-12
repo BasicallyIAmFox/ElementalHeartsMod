@@ -20,7 +20,10 @@ namespace ElementalHeartsMod.Items.Consumables.Hearts
         }
         public class PreHardmode
         {
-            public EHBase Dirt = new EHBase("Dirt Heart", "dirt", 1, 1, "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/DirtHeart");
-        }
+            public PreHardmode()
+            {
+                new EHBase("Dirt Heart", "dirt", 1, 1, "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/DirtHeart");
+            }
+        }  
     }
 }

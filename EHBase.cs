@@ -5,65 +5,73 @@ using Terraria.ModLoader;
 namespace ElementalHeartsMod
 {
     public class EHBase : ModItem
-    {
-        public EHBase(string name, string tag, int bonus, int rarity, string texturePath)
+    {      
+       
+        public EHBase(string name = "Dirt Heart", string tag = "dirt", int bonus = 1, int rarity = 1, string texturePath = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/DirtHeart") : base()
         {
-            string name1 = name;
-            string tag1 = tag;
-            int bonus1 = bonus;
-            int rarity1 = rarity;
-            string texturePath1 = texturePath;
+            this.name = name;
+            this.tag = tag;
+            this.bonus = bonus;
+            this.rarity = rarity;
+            this.texturePath = texturePath;
         }
 
-        public string name1 = "Dort"; 
-        public string tag1 = "dort";
-        public int bonus1 = 1;
-        public int rarity1 = 1;
+        public string name; 
+        public string tag;
+        public int bonus;
+        public int rarity;
 
-        public string texturePath1 = "ElementalHeartsMod/Test"; public override string Texture => texturePath1;
+        public string texturePath; public override string Texture => texturePath;
 
         public override bool CanUseItem(Player player)
         {
-            return player.GetModPlayer<EHTracker>().used[tag1] < ModContent.GetInstance<EHConfig>().MaxHearts;
+            if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
+            {
+                return player.GetModPlayer<EHTracker>().used[tag] < ModContent.GetInstance<EHConfig>().MaxHearts;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public override bool? UseItem(Player player)
         {
-            player.statLifeMax2 += bonus1;
-            player.statLife += bonus1;
+            player.statLifeMax2 += bonus;
+            player.statLife += bonus;
             if (Main.myPlayer == player.whoAmI)
             {
-                player.HealEffect(bonus1, true);
+                player.HealEffect(bonus, true);
             }
 
-            if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag1))
+            if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
             {
-                player.GetModPlayer<EHTracker>().used[tag1] += 1;
+                player.GetModPlayer<EHTracker>().used[tag] += 1;
             }
             else
             {
-                player.GetModPlayer<EHTracker>().used.Add(tag1, 1);
+                player.GetModPlayer<EHTracker>().used.Add(tag, 1);
             }
 
             return true;
         }
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Permanently increases maximum life by " + bonus1);
-            DisplayName.SetDefault(name1);
+            Tooltip.SetDefault("Permanently increases maximum life by " + bonus);
+            DisplayName.SetDefault(name);
         }
         public override void SetDefaults()
         {
             Item.CloneDefaults(ItemID.LifeFruit);
-            Item.rare = rarity1;
+            Item.rare = rarity;
         }
         public override void HoldItem(Player player)
         {
             //Make UI next to heart amount that shows how much hp this will raise by.
 
-            if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag1))
+            if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
             {
-                Main.NewText(player.GetModPlayer<EHTracker>().used[tag1]);
+                Main.NewText(player.GetModPlayer<EHTracker>().used[tag]);
             }
         }
     }
