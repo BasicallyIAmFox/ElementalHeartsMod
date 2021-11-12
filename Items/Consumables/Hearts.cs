@@ -20,17 +20,7 @@ namespace ElementalHeartsMod.Items.Consumables.Hearts
         }
         public class PreHardmode
         {
-            public class Dirt : EHBase
-            {
-                public void Init()
-                {
-                    name = "Dirt Heart";
-                    tag = "dirt";
-                    bonus = 1;
-
-                    texturePath = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Vanilla/PreHardmode/DirtHeart";
-                }
-            }
+            public EHBase Dirt = new EHBase("Dirt Heart", "dirt", 1, 1, "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/DirtHeart");
         }
     }
 }
