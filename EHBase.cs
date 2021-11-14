@@ -31,14 +31,16 @@ namespace ElementalHeartsMod
                     pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Boss/HardmodeBoss";
                     break;
                 //Hardmode
-                case "HardmodeMarket":
-                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Hardmode/HardmodeMarket";
+                case "Hardmode":
+                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Hardmode/";
                     break;
-                case "HardmodeMonsterDrop":
-                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Hardmode/HardmodeMonster/HardmodeMonsterDrop";
+                //Other
+                case "Other":
+                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Other/";
                     break;
-                case "HardmodeMonster":
-                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Hardmode/HardmodeMonster";
+                //PreHardmode
+                case "PreHardmode":
+                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/";
                     break;
             }
             texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);

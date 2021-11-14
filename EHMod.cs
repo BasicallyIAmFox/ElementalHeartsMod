@@ -21,17 +21,17 @@ namespace ElementalHeartsMod
         }
         public class Hardmode
         {
+            public class Bubble : EHBase { public Bubble() : base(category: "Hardmode", rarity: 0, station: TileID.TreeAmethyst, material: ItemID.Amethyst) { } }
         }
         public class Other
         {
         }
         public class PreHardmode
         {
-            public class Amber : EHBase { public Amber() : base(rarity: 0, station: TileID.Furnaces, material: ItemID.Amber) { } }
-            public class Amethyst : EHBase { public Amethyst() : base(rarity: 0) { } }
-            public class BorealWood : EHBase { public BorealWood() : base(rarity: 0) { } }
-            public class Bubble : EHBase { public Bubble() : base(rarity: 1) { } }
-            public class Cactus : EHBase { public Cactus() : base(rarity: 0) { } }
+            public class Amber : EHBase { public Amber() : base(category: "PreHardmode", rarity: 0, station: TileID.TreeAmber, material: ItemID.Amber) { } }
+            public class Amethyst : EHBase { public Amethyst() : base(category: "PreHardmode", rarity: 0, station: TileID.TreeAmethyst, material: ItemID.Amethyst) { } }
+            public class BorealWood : EHBase { public BorealWood() : base(category: "PreHardmode", rarity: 0, station: TileID.Trees, material: ItemID.BorealWood) { } }
+            public class Cactus : EHBase { public Cactus() : base(category: "PreHardmode", rarity: 0, station: TileID.Cactus, material: ItemID.Cactus) { } }
         }
     }
 }
