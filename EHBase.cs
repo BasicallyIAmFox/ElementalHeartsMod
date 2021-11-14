@@ -9,7 +9,7 @@ namespace ElementalHeartsMod
 {
     public class EHBase : ModItem
     {
-        public EHBase(int rarity, int station = 0, int material = 0)
+        public EHBase(string category, int rarity, int station = 0, int material = 0)
         {
             this.rarity = rarity;
 
@@ -17,6 +17,16 @@ namespace ElementalHeartsMod
             this.material = material;
 
             name = (Regex.Replace(GetType().Name, "[A-Z]", " $0").Trim() + " Heart");
+
+            switch (category)
+            {
+                case "Event":
+                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Boss/Event/";
+                    break;
+                case "Hardmode":
+                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Boss/";
+                    break;
+            }
             texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
         }
 
@@ -29,7 +39,7 @@ namespace ElementalHeartsMod
         public int materialCost;
 
 
-        public string texturePath; const string pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/";
+        public string texturePath; string pathPrefix;
         public override string Texture => texturePath;
 
         public override bool CanUseItem(Player player)
