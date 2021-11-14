@@ -1,28 +1,36 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ElementalHeartsMod
 {
-    [Serializable]
     public class EHBase : ModItem
     {
-        public EHBase(string name, string tag, int bonus, int rarity, string texturePath)
+        public EHBase(int rarity, int station = 0, int material = 0)
         {
-            this.name = name;
-            this.tag = tag;
-            this.bonus = bonus;
             this.rarity = rarity;
-            this.texturePath = texturePath;
+
+            this.station = station;
+            this.material = material;
+
+            name = (Regex.Replace(GetType().Name, "[A-Z]", " $0").Trim() + " Heart");
+            texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
         }
 
         public string name; 
         public string tag;
-        public int bonus;
         public int rarity;
 
-        public string texturePath; public override string Texture => texturePath;
+        public int station;
+        public int material;
+        public int materialCost;
+
+
+        public string texturePath; const string pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/";
+        public override string Texture => texturePath;
 
         public override bool CanUseItem(Player player)
         {
@@ -38,11 +46,11 @@ namespace ElementalHeartsMod
 
         public override bool? UseItem(Player player)
         {
-            player.statLifeMax2 += bonus;
-            player.statLife += bonus;
+            player.statLifeMax2 += (rarity + 1);
+            player.statLife += (rarity + 1);
             if (Main.myPlayer == player.whoAmI)
             {
-                player.HealEffect(bonus, true);
+                player.HealEffect((rarity + 1), true);
             }
 
             if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
@@ -58,7 +66,7 @@ namespace ElementalHeartsMod
         }
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Permanently increases maximum life by " + bonus);
+            Tooltip.SetDefault("Permanently increases maximum life by " + (rarity + 1));
             DisplayName.SetDefault(name);
         }
         public override void SetDefaults()
@@ -74,6 +82,10 @@ namespace ElementalHeartsMod
             {
                 Main.NewText(player.GetModPlayer<EHTracker>().used[tag]);
             }
+        }
+        public override void AddRecipes()
+        {
+            if (material != 0) CreateRecipe().AddIngredient(material, CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material]).AddTile(station).Register();
         }
     }
 }
