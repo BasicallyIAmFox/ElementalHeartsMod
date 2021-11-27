@@ -58,6 +58,18 @@ namespace ElementalHeartsMod
             public class Granite : EHBase { public Granite() : base(4, TileID.WorkBenches, ItemID.GraniteBlock) { } }
             public class Hay : EHBase { public Hay() : base(4, TileID.WorkBenches, ItemID.Hay) { } }
             public class Hellstone : EHBase { public Hellstone() : base(4, TileID.Hellforge, ItemID.Hellstone) { } }
+            public class Honey : EHBase { public Honey() : base(4, TileID.HoneyDispenser, ItemID.HoneyBlock) { } }
+            public class Ice : EHBase { public Ice() : base(4, TileID.IceMachine, ItemID.IceBlock) { } }
+            public class Iron : EHBase { public Iron() : base(4, TileID.Furnaces, ItemID.IronOre) { } }
+            public class Lead : EHBase { public Lead() : base(4, TileID.Furnaces, ItemID.LeadOre) { } }
+            public class Marble : EHBase { public Marble() : base(4, TileID.WorkBenches, ItemID.Marble) { } }
+            public class Meteorite : EHBase { public Meteorite() : base(4, TileID.Furnaces, ItemID.Meteorite) { } }
+            public class Mushroom : EHBase { public Mushroom() : base(4, TileID.Sawmill, ItemID.GlowingMushroom) { } }
+            public class Obsidian : EHBase { public Obsidian() : base(4, TileID.Hellforge, ItemID.Obsidian) { } }
+
+
+
+
         }
     }
 }
