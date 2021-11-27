@@ -9,9 +9,23 @@ namespace ElementalHeartsMod
 {
     public class EHBase : ModItem
     {
-        public EHBase(string category, int rarity, int station = 0, int material = 0)
+        public EHBase(int category, int station = 0, int material = 0, int rarity = -1)
         {
-            this.rarity = rarity;
+            if (rarity == -1)
+            {
+                if (material != 0)
+                {
+                    this.rarity = new Item(material).rare;
+                }
+                else
+                {
+                    this.rarity = 0;
+                }
+            }
+            else
+            {
+                this.rarity = rarity;
+            }
 
             this.station = station;
             this.material = material;
@@ -20,26 +34,16 @@ namespace ElementalHeartsMod
 
             switch (category)
             {
-                //Boss
-                case "EventBoss":
-                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Boss/EventBoss";
+                case 1:
+                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Boss/";
                     break;
-                case "HardmodeBoss":
-                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Boss/HardmodeBoss";
-                    break;
-                case "PreHardmodeBoss":
-                    pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Boss/HardmodeBoss";
-                    break;
-                //Hardmode
-                case "Hardmode":
+                case 2:
                     pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Hardmode/";
                     break;
-                //Other
-                case "Other":
+                case 3:
                     pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Other/";
                     break;
-                //PreHardmode
-                case "PreHardmode":
+                case 4:
                     pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/";
                     break;
             }
