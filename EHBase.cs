@@ -47,12 +47,13 @@ namespace ElementalHeartsMod
                     pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/";
                     break;
             }
+            bonusHP = (rarity + 1) * 2;
             texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
         }
 
         public string name; 
         public string tag;
-        public int rarity;
+        public int rarity; public int bonusHP;
 
         public int station;
         public int material;
@@ -76,11 +77,11 @@ namespace ElementalHeartsMod
 
         public override bool? UseItem(Player player)
         {
-            player.statLifeMax2 += (rarity + 1);
-            player.statLife += (rarity + 1);
+            player.statLifeMax2 += bonusHP;
+            player.statLife += bonusHP;
             if (Main.myPlayer == player.whoAmI)
             {
-                player.HealEffect((rarity + 1), true);
+                player.HealEffect(bonusHP, true);
             }
 
             if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
@@ -96,7 +97,7 @@ namespace ElementalHeartsMod
         }
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Permanently increases maximum life by " + (rarity + 1));
+            Tooltip.SetDefault("Permanently increases maximum life by " + bonusHP);
             DisplayName.SetDefault(name);
         }
         public override void SetDefaults()
