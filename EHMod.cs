@@ -1,11 +1,5 @@
-using System;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using Terraria.ModLoader;
 using Terraria.ID;
-using Terraria;
+using Terraria.ModLoader;
 
 namespace ElementalHeartsMod
 {
@@ -25,9 +19,9 @@ namespace ElementalHeartsMod
         public class Boss
         {
         }
-        public class Hardmode 
+        public class Hardmode
         {
-            public class Adamantite : EHBase { public Adamantite() : base(2, TileID.AdamantiteForge, ItemID.AdamantiteOre) { } }  
+            public class Adamantite : EHBase { public Adamantite() : base(2, TileID.AdamantiteForge, ItemID.AdamantiteOre) { } }
             public class Bubble : EHBase { public Bubble() : base(2, TileID.BubbleMachine, ItemID.Bubble) { } }
 
             public class Flesh : EHBase { public Flesh() : base(2, TileID.FleshCloningVat, ItemID.FleshBlock) { } }

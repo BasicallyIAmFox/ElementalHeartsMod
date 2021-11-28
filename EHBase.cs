@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -54,7 +53,7 @@ namespace ElementalHeartsMod
         }
 
         public string tag;
-        public string name; 
+        public string name;
         public int rarity; public int bonusHP;
 
         public int station;
