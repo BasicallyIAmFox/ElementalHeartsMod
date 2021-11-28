@@ -30,7 +30,8 @@ namespace ElementalHeartsMod
             this.station = station;
             this.material = material;
 
-            name = (Regex.Replace(GetType().Name, "[A-Z]", " $0").Trim() + " Heart");
+            tag = Regex.Replace(GetType().Name, "[A-Z]", " $0").Trim();
+            name = (tag + " Heart");
 
             switch (category)
             {
@@ -50,11 +51,10 @@ namespace ElementalHeartsMod
             bonusHP = (this.rarity + 1) * 2;
             texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
 
-            tag = GetType().Name;
         }
 
-        public string name; 
         public string tag;
+        public string name; 
         public int rarity; public int bonusHP;
 
         public int station;
@@ -70,7 +70,7 @@ namespace ElementalHeartsMod
         {
             if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
             {
-                return player.GetModPlayer<EHTracker>().used[tag] < ModContent.GetInstance<EHConfig>().MaxHearts;
+                return player.GetModPlayer<EHTracker>().used[tag] < (ModContent.GetInstance<EHConfig>().MaxHearts * bonusHP);
             }
             else
             {
@@ -89,11 +89,11 @@ namespace ElementalHeartsMod
 
             if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
             {
-                player.GetModPlayer<EHTracker>().used[tag] += 1;
+                player.GetModPlayer<EHTracker>().used[tag] += bonusHP;
             }
             else
             {
-                player.GetModPlayer<EHTracker>().used.Add(tag, 1);
+                player.GetModPlayer<EHTracker>().used.Add(tag, bonusHP);
             }
 
             return true;
