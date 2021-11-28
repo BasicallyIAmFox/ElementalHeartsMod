@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Terraria.ModLoader;
 using Terraria.ID;
+using Terraria;
 
 namespace ElementalHeartsMod
 {
@@ -12,6 +13,11 @@ namespace ElementalHeartsMod
     {
         public override void Load()
         {
+        }
+
+        internal enum PacketType : byte
+        {
+            SyncPlayer
         }
     }
     public class Hearts

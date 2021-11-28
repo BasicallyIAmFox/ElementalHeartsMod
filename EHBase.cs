@@ -49,6 +49,8 @@ namespace ElementalHeartsMod
             }
             bonusHP = (this.rarity + 1) * 2;
             texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
+
+            tag = GetType().Name;
         }
 
         public string name; 
@@ -62,6 +64,7 @@ namespace ElementalHeartsMod
 
         public string texturePath; string pathPrefix;
         public override string Texture => texturePath;
+
 
         public override bool CanUseItem(Player player)
         {
