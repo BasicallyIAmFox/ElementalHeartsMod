@@ -66,7 +66,16 @@ namespace ElementalHeartsMod
             public class Meteorite : EHBase { public Meteorite() : base(4, TileID.Furnaces, ItemID.Meteorite) { } }
             public class Mushroom : EHBase { public Mushroom() : base(4, TileID.Sawmill, ItemID.GlowingMushroom) { } }
             public class Obsidian : EHBase { public Obsidian() : base(4, TileID.Hellforge, ItemID.Obsidian) { } }
-
+            public class PalmWood : EHBase { public PalmWood() : base(4, TileID.Trees, ItemID.PalmWood) { } }
+            public class Platinum : EHBase { public Platinum() : base(4, TileID.Furnaces, ItemID.PlatinumOre) { } }
+            public class Pumpkin : EHBase { public Pumpkin() : base(4, TileID.Sawmill, ItemID.Pumpkin) { } }
+            public class PurpleIce : EHBase { public PurpleIce() : base(4, TileID.IceMachine, ItemID.PurpleIceBlock) { } }
+            public class RainCloud : EHBase { public RainCloud() : base(4, TileID.SkyMill, ItemID.RainCloud) { } }
+            public class RedIceHeart : EHBase { public RedIceHeart() : base(4, TileID.IceMachine, ItemID.RedIceBlock) { } }
+            public class RichMahogany : EHBase { public RichMahogany() : base(4, TileID.Trees, ItemID.RichMahogany) { } }
+            public class Ruby : EHBase { public Ruby() : base(4, TileID.TreeRuby, ItemID.Ruby) { } }
+            public class Sand : EHBase { public Sand() : base(4, TileID.HeavyWorkBench, ItemID.SandBlock) { } }
+            public class Sapphire : EHBase { public Sapphire() : base(4, TileID.TreeSapphire, ItemID.Sapphire) { } }
 
 
 
