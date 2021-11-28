@@ -111,11 +111,6 @@ namespace ElementalHeartsMod
         public override void HoldItem(Player player)
         {
             //Make UI next to heart amount that shows how much hp this will raise by.
-
-            if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
-            {
-                Main.NewText(player.GetModPlayer<EHTracker>().used[tag]);
-            }
         }
         public override void AddRecipes()
         {
