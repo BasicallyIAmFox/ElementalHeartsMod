@@ -47,7 +47,7 @@ namespace ElementalHeartsMod
                     pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/";
                     break;
             }
-            bonusHP = (rarity + 1) * 2;
+            bonusHP = (this.rarity + 1) * 2;
             texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
         }
 

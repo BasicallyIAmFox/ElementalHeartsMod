@@ -71,7 +71,7 @@ namespace ElementalHeartsMod
             public class Pumpkin : EHBase { public Pumpkin() : base(4, TileID.Sawmill, ItemID.Pumpkin) { } }
             public class PurpleIce : EHBase { public PurpleIce() : base(4, TileID.IceMachine, ItemID.PurpleIceBlock) { } }
             public class RainCloud : EHBase { public RainCloud() : base(4, TileID.SkyMill, ItemID.RainCloud) { } }
-            public class RedIceHeart : EHBase { public RedIceHeart() : base(4, TileID.IceMachine, ItemID.RedIceBlock) { } }
+            public class RedIce : EHBase { public RedIce() : base(4, TileID.IceMachine, ItemID.RedIceBlock) { } }
             public class RichMahogany : EHBase { public RichMahogany() : base(4, TileID.Trees, ItemID.RichMahogany) { } }
             public class Ruby : EHBase { public Ruby() : base(4, TileID.TreeRuby, ItemID.Ruby) { } }
             public class Sand : EHBase { public Sand() : base(4, TileID.HeavyWorkBench, ItemID.SandBlock) { } }
