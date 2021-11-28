@@ -76,9 +76,16 @@ namespace ElementalHeartsMod
             public class Ruby : EHBase { public Ruby() : base(4, TileID.TreeRuby, ItemID.Ruby) { } }
             public class Sand : EHBase { public Sand() : base(4, TileID.HeavyWorkBench, ItemID.SandBlock) { } }
             public class Sapphire : EHBase { public Sapphire() : base(4, TileID.TreeSapphire, ItemID.Sapphire) { } }
-
-
-
+            public class Shadewood : EHBase { public Shadewood() : base(4, TileID.Trees, ItemID.Shadewood) { } }
+            public class Silver : EHBase { public Silver() : base(4, TileID.Furnaces, ItemID.SilverOre) { } }
+            public class Slime : EHBase { public Slime() : base(4, TileID.Solidifier, ItemID.Gel) { } }
+            public class SnowCloud : EHBase { public SnowCloud() : base(4, TileID.SkyMill, ItemID.SnowCloudBlock) { } }
+            public class Stone : EHBase { public Stone() : base(4, TileID.Furnaces, ItemID.StoneBlock) { } }
+            public class Sunplate : EHBase { public Sunplate() : base(4, TileID.SkyMill, ItemID.SunplateBlock) { } }
+            public class Tin : EHBase { public Tin() : base(4, TileID.Furnaces, ItemID.TinOre) { } }
+            public class Topaz : EHBase { public Topaz() : base(4, TileID.TreeTopaz, ItemID.Topaz) { } }
+            public class Tungsten : EHBase { public Tungsten() : base(4, TileID.Furnaces, ItemID.TungstenOre) { } }
+            public class Wood : EHBase { public Wood() : base(4, TileID.Trees, ItemID.Wood) { } }
         }
     }
 }
