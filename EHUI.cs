@@ -9,12 +9,17 @@ namespace ElementalHeartsMod
     {
         public override void OnInitialize()
         {
-            UIPanel panel = new UIPanel(); // 2
-            panel.Width.Set(300, 0); // 3
-            panel.Height.Set(300, 0); // 3
+            UIPanel panel = new UIPanel();
+            panel.Width.Set(300, 0);
+            panel.Height.Set(100, 0);
+            panel.HAlign = 0.5f;
+            panel.VAlign = 0.5f;
+            Append(panel);
 
-            Append(panel); // 4
+            UIText text = new UIText("Hello world!");
+            text.HAlign = 0.5f;
+            text.VAlign = 0.5f;
+            panel.Append(text);
         }
-
     }
 }

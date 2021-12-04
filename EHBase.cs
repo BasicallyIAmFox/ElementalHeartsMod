@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -79,6 +80,8 @@ namespace ElementalHeartsMod
 
         public override bool? UseItem(Player player)
         {
+            Thread.Sleep(100);
+
             player.statLifeMax2 += bonusHP;
             player.statLife += bonusHP;
             if (Main.myPlayer == player.whoAmI)
@@ -95,6 +98,7 @@ namespace ElementalHeartsMod
                 player.GetModPlayer<EHTracker>().used.Add(tag, bonusHP);
             }
 
+            //Spawn flashwave based on bonusHP.
             return true;
         }
         public override void SetStaticDefaults()
@@ -108,10 +112,10 @@ namespace ElementalHeartsMod
         {
             Item.CloneDefaults(ItemID.LifeFruit);
             Item.rare = rarity;
+            Item.value = (int)(new Item(material).value * (CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.5));
         }
         public override void HoldItem(Player player)
         {
-            //.EHUIS.Update();
         }
         public override void AddRecipes()
         {

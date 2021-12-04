@@ -23,6 +23,10 @@ namespace ElementalHeartsMod
                 EHUIS.Activate();               
             }
         }
+        public override void PostSetupContent()
+        {
+            ShowEHUI();
+        }
         internal enum PacketType : byte
         {
             SyncPlayer
@@ -35,6 +39,37 @@ namespace ElementalHeartsMod
         public void HideEHUI()
         {
             EHInterface?.SetState(null);
+        }
+    }
+    public class EHModSystem : ModSystem
+    {
+        private GameTime _lastUpdateUiGameTime;
+        internal EHMod mod = ModContent.GetInstance<EHMod>();
+        public override void UpdateUI(GameTime gameTime)
+        {
+            _lastUpdateUiGameTime = gameTime;
+            if (mod.EHInterface?.CurrentState != null)
+            {
+                mod.EHUIS.Update(gameTime);
+            }
+        }
+        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+        {
+            int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
+            if (mouseTextIndex != -1)
+            {
+                layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
+                    "Elemental Hearts: UI",
+                    delegate
+                    {
+                        if (_lastUpdateUiGameTime != null && mod.EHInterface?.CurrentState != null)
+                        {
+                            mod.EHInterface.Draw(Main.spriteBatch, _lastUpdateUiGameTime);
+                        }
+                        return true;
+                    },
+                       InterfaceScaleType.UI));
+            }
         }
     }
     public class Hearts
