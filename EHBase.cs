@@ -116,7 +116,21 @@ namespace ElementalHeartsMod
         }
         public override void HoldItem(Player player)
         {
+            ModContent.GetInstance<EHMod>().SendEHText("+" + bonusHP + " Max HP", Item.color);
         }
+
+        public override void UpdateInventory(Player player)
+        {
+            if (player.HeldItem != Item)
+            {
+                ModContent.GetInstance<EHMod>().DeleteText();
+            }
+        }
+        public override void Update(ref float gravity, ref float maxFallSpeed)
+        {
+            ModContent.GetInstance<EHMod>().DeleteText();
+        }
+
         public override void AddRecipes()
         {
 

@@ -5,9 +5,17 @@ A rewritten classic mod - Elemental Hearts - adds in numerous consumable life cr
 	Gives a use for leftover/extra blocks and ores, without being unbalanced.
 	Spreads with progression
 
+	Warning: Player data gets reset after every update. This is unavoidable - sorry!
 
 Changelog:
 
+1.2
+	Code Optimizations.
+	UI - Text demonstrating amount of potential HP earned, also red text if heart has already been consumed.
+	Reverse crafting recipes - All hearts can be extracted back into 80% of its material form, must be near an extractinator.
+	Value is now consistent with material cost. Sell price is a 75% return of what its materials would cost.
+	Logging code, in the client.txt file.
+	
 1.1
 	All pre-hardmode hearts finished.
 	First release on the mod browser.

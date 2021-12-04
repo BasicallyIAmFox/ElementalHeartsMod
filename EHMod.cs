@@ -20,27 +20,27 @@ namespace ElementalHeartsMod
                 EHInterface = new UserInterface();
 
                 EHUIS = new EHUIState();
-                EHUIS.Activate();               
+                EHUIS.Activate();
             }
         }
         public override void PostSetupContent()
         {
-            ShowEHUI();
+            EHInterface?.SetState(EHUIS);
+        }
+        public void SendEHText(string text, Color color)
+        {
+            EHUIS.CreateText(text, color);
+        }
+        public void DeleteText()
+        {
+            EHUIS.RemoveAllChildren();
         }
         internal enum PacketType : byte
         {
             SyncPlayer
         }
-        public void ShowEHUI()
-        {
-            EHInterface?.SetState(EHUIS);
-        }
-
-        public void HideEHUI()
-        {
-            EHInterface?.SetState(null);
-        }
     }
+
     public class EHModSystem : ModSystem
     {
         private GameTime _lastUpdateUiGameTime;
@@ -72,6 +72,7 @@ namespace ElementalHeartsMod
             }
         }
     }
+
     public class Hearts
     {
         public class Boss
