@@ -50,7 +50,6 @@ namespace ElementalHeartsMod
             }
             bonusHP = (this.rarity + 1) * 5;
             texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
-
         }
 
         public string tag;
@@ -102,6 +101,8 @@ namespace ElementalHeartsMod
         {
             Tooltip.SetDefault("Permanently increases maximum life by " + bonusHP);
             DisplayName.SetDefault(name);
+
+            Mod.Logger.Info(tag + " initialized.");
         }
         public override void SetDefaults()
         {
@@ -110,7 +111,7 @@ namespace ElementalHeartsMod
         }
         public override void HoldItem(Player player)
         {
-            //Make UI next to heart amount that shows how much hp this will raise by.
+            //.EHUIS.Update();
         }
         public override void AddRecipes()
         {

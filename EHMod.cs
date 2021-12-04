@@ -3,21 +3,38 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
 using ElementalHeartsMod;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using Terraria.DataStructures;
 
 namespace ElementalHeartsMod
 {
     public class EHMod : Mod
     {
+        public UserInterface EHInterface;
+        internal EHUIState EHUIS;
         public override void Load()
         {
             if (!Main.dedServ)
             {
+                EHInterface = new UserInterface();
+
+                EHUIS = new EHUIState();
+                EHUIS.Activate();               
             }
         }
-
         internal enum PacketType : byte
         {
             SyncPlayer
+        }
+        public void ShowEHUI()
+        {
+            EHInterface?.SetState(EHUIS);
+        }
+
+        public void HideEHUI()
+        {
+            EHInterface?.SetState(null);
         }
     }
     public class Hearts
