@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -47,7 +48,7 @@ namespace ElementalHeartsMod
                     pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/";
                     break;
             }
-            bonusHP = (this.rarity + 1) * 2;
+            bonusHP = (int)((this.rarity + 1) * ((rarity / 2)+1));
             texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
 
         }

@@ -1,5 +1,8 @@
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.UI;
+using ElementalHeartsMod;
 
 namespace ElementalHeartsMod
 {
@@ -7,6 +10,9 @@ namespace ElementalHeartsMod
     {
         public override void Load()
         {
+            if (!Main.dedServ)
+            {
+            }
         }
 
         internal enum PacketType : byte
@@ -27,6 +33,7 @@ namespace ElementalHeartsMod
             public class Flesh : EHBase { public Flesh() : base(2, TileID.FleshCloningVat, ItemID.FleshBlock) { } }
 
             public class Lesion : EHBase { public Lesion() : base(2, TileID.LesionStation, ItemID.LesionBlock) { } }
+            public class Luminite : EHBase { public Luminite() : base(2, TileID.LunarCraftingStation, ItemID.LunarOre) { } }
 
         }
         public class Other
