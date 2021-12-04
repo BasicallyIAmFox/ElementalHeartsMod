@@ -10,12 +10,14 @@ A rewritten classic mod - Elemental Hearts - adds in numerous consumable life cr
 Changelog:
 
 1.2
-	Code Optimizations.
-	UI - Text demonstrating amount of potential HP earned, also red text if heart has already been consumed.
+	Strong code Optimizations.
+	UI text demonstrating amount of potential HP earned, text doesnt show up if you can't consume another.
 	Reverse crafting recipes - All hearts can be extracted back into 80% of its material form, must be near an extractinator.
 	Value is now consistent with material cost. Sell price is a 75% return of what its materials would cost.
 	Logging code, in the client.txt file.
-	
+	Mini shockwaves are released now opon consumption. If a heart gives +5 Max HP, theres 1. If a heart gives +25 Max HP, theres 5. You get the pattern.
+	Text is now determined by the rarity of the heart.
+
 1.1
 	All pre-hardmode hearts finished.
 	First release on the mod browser.

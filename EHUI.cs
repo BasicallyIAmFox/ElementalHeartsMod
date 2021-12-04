@@ -15,7 +15,7 @@ namespace ElementalHeartsMod
 			UIText EHText = new UIText(text);
 			EHText.HAlign = .83f;
 			EHText.VAlign = .02f;
-			EHText.TextColor = Color.Green;
+			EHText.TextColor = color;
 			Append(EHText);
 		}
 	}

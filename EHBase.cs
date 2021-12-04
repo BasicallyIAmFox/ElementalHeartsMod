@@ -56,6 +56,47 @@ namespace ElementalHeartsMod
             }
             bonusHP = (this.rarity + 1) * 5;
             texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
+
+
+            switch (this.rarity)
+            {
+                case 0:
+                    rareColor = Colors.RarityNormal;
+                    break;
+                case 1:
+                    rareColor = Colors.RarityBlue;
+                    break;
+                case 2:
+                    rareColor = Colors.RarityGreen;
+                    break;
+                case 3:
+                    rareColor = Colors.RarityOrange;
+                    break;
+                case 4:
+                    rareColor = Colors.RarityRed;
+                    break;
+                case 5:
+                    rareColor = Colors.RarityPink;
+                    break;
+                case 6:
+                    rareColor = Colors.RarityPurple;
+                    break;
+                case 7:
+                    rareColor = Colors.RarityLime;
+                    break;
+                case 8:
+                    rareColor = Colors.RarityYellow;
+                    break;
+                case 9:
+                    rareColor = Colors.RarityCyan;
+                    break;
+                case 10:
+                    rareColor = Colors.RarityDarkRed;
+                    break;
+                case 11:
+                    rareColor = Colors.RarityDarkPurple;
+                    break;
+            }
         }
 
         public string tag;
@@ -68,6 +109,7 @@ namespace ElementalHeartsMod
 
         public string texturePath; string pathPrefix;
         public override string Texture => texturePath;
+        public Color rareColor;
 
 
         public override bool CanUseItem(Player player)
@@ -116,6 +158,7 @@ namespace ElementalHeartsMod
                 EHWave waveProjectile = wave.ModProjectile as EHWave;
                 waveProjectile.SetWaveValues(bonusHP / 5);
             }
+            ModContent.GetInstance<EHMod>().DeleteText();
             return true;
         }
         public override void SetStaticDefaults()
@@ -133,7 +176,10 @@ namespace ElementalHeartsMod
         }
         public override void HoldItem(Player player)
         {
-            ModContent.GetInstance<EHMod>().SendEHText("+" + bonusHP + " Max HP", Item.color);
+            if (CanUseItem(player) == true)
+            {
+                ModContent.GetInstance<EHMod>().SendEHText("+" + bonusHP + " Max HP", rareColor);
+            }
         }
 
         public override void UpdateInventory(Player player)
