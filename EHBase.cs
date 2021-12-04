@@ -112,7 +112,7 @@ namespace ElementalHeartsMod
         {
             Item.CloneDefaults(ItemID.LifeFruit);
             Item.rare = rarity;
-            Item.value = (int)(new Item(material).value * (CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.5));
+            Item.value = (int)(new Item(material).value * (CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25));
         }
         public override void HoldItem(Player player)
         {
