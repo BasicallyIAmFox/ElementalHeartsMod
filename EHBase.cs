@@ -96,6 +96,8 @@ namespace ElementalHeartsMod
                 case 11:
                     rareColor = Colors.RarityDarkPurple;
                     break;
+                default:
+                    break;
             }
         }
 
