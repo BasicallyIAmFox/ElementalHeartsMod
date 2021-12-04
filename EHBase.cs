@@ -119,7 +119,22 @@ namespace ElementalHeartsMod
         }
         public override void AddRecipes()
         {
-            if (material != 0) CreateRecipe().AddIngredient(material, CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material]).AddTile(station).Register();
+
+            if (material != 0)
+            {
+                //Create this item:
+                CreateRecipe(1)
+                    .AddIngredient(material, CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material])
+                    .AddTile(station)
+                    .Register();
+
+                //Return back to ingrediants.
+                Recipe reverse = CreateRecipe()
+                    .AddIngredient(this, 1)
+                    .AddTile(TileID.Extractinator);
+                reverse.ReplaceResult(material, (int)(CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25));
+                reverse.Register();
+            }
         }
     }
 }
