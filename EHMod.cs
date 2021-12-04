@@ -6,11 +6,17 @@ using ElementalHeartsMod;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria.DataStructures;
+using Microsoft.Xna.Framework.Graphics;
+
+using Terraria.Graphics.Shaders;
+using Terraria.Graphics.Effects;
 
 namespace ElementalHeartsMod
 {
     public class EHMod : Mod
     {
+        //public static EHMod Instance => ModContent.GetInstance<EHMod>();
+
         public UserInterface EHInterface;
         internal EHUIState EHUIS;
         public override void Load()
@@ -21,6 +27,10 @@ namespace ElementalHeartsMod
 
                 EHUIS = new EHUIState();
                 EHUIS.Activate();
+
+                Ref<Effect> screenRef = new Ref<Effect>(Assets.Request<Effect>(("Effects/EHWaveEffect"), ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
+                Filters.Scene["EHWave"] = new Filter(new ScreenShaderData(screenRef, "Shockwave"), EffectPriority.VeryHigh);
+                Filters.Scene["EHWave"].Load();
             }
         }
         public override void PostSetupContent()

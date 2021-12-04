@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Terraria.Graphics.Effects;
+using System;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
+using ElementalHeartsMod.Effects;
+using Terraria.DataStructures;
 
 namespace ElementalHeartsMod
 {
@@ -12,6 +16,7 @@ namespace ElementalHeartsMod
     {
         public EHBase(int category, int station = 0, int material = 0, int rarity = -1)
         {
+            cat = category;
             if (rarity == -1)
             {
                 if (material != 0)
@@ -34,7 +39,7 @@ namespace ElementalHeartsMod
             tag = Regex.Replace(GetType().Name, "[A-Z]", " $0").Trim();
             name = (tag + " Heart");
 
-            switch (category)
+            switch (cat)
             {
                 case 1:
                     pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/Boss/";
@@ -56,11 +61,10 @@ namespace ElementalHeartsMod
         public string tag;
         public string name;
         public int rarity; public int bonusHP;
+        public int cat;
 
         public int station;
         public int material;
-        public int materialCost;
-
 
         public string texturePath; string pathPrefix;
         public override string Texture => texturePath;
@@ -68,20 +72,25 @@ namespace ElementalHeartsMod
 
         public override bool CanUseItem(Player player)
         {
-            if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
+            if (!Filters.Scene["EHWave"].IsActive())
             {
-                return player.GetModPlayer<EHTracker>().used[tag] < (ModContent.GetInstance<EHConfig>().MaxHearts * bonusHP);
+                if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
+                {
+                    return player.GetModPlayer<EHTracker>().used[tag] < (ModContent.GetInstance<EHConfig>().MaxHearts * bonusHP);
+                }
+                else
+                {
+                    return true;
+                }
             }
             else
             {
-                return true;
+                return false;
             }
         }
 
         public override bool? UseItem(Player player)
         {
-            Thread.Sleep(100);
-
             player.statLifeMax2 += bonusHP;
             player.statLife += bonusHP;
             if (Main.myPlayer == player.whoAmI)
@@ -98,7 +107,15 @@ namespace ElementalHeartsMod
                 player.GetModPlayer<EHTracker>().used.Add(tag, bonusHP);
             }
 
-            //Spawn flashwave based on bonusHP.
+            if (Main.netMode != NetmodeID.Server && !Filters.Scene["EHWave"].IsActive())
+            {
+                IProjectileSource source = new ProjectileSource_Item(player, Item);
+
+                int waveI = Projectile.NewProjectile(source, player.Center, new Vector2(0, 0), ModContent.GetInstance<EHWave>().Type, 0, 0f, Main.myPlayer);
+                Projectile wave = Main.projectile[waveI];
+                EHWave waveProjectile = wave.ModProjectile as EHWave;
+                waveProjectile.SetWaveValues(bonusHP / 5);
+            }
             return true;
         }
         public override void SetStaticDefaults()
