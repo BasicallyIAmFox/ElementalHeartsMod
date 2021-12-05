@@ -16,5 +16,8 @@ namespace ElementalHeartsMod
         [DefaultValue(true)]
         [Label("Enable Consumption Effect (Default: True)")]
         public bool EHWaveEnabled;
+        [DefaultValue(false)]
+        [Label("Show Bonus HP Info (Default: False)")]
+        public bool EHInfoEnabled;
     }
 }
