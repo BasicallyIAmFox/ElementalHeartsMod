@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using ElementalHeartsMod.Effects;
 using Terraria.DataStructures;
+using System.Collections.Generic;
 
 namespace ElementalHeartsMod
 {
@@ -113,6 +114,8 @@ namespace ElementalHeartsMod
         public override string Texture => texturePath;
         public Color rareColor;
 
+        public string tooltip;
+
 
         public override bool CanUseItem(Player player)
         {
@@ -165,7 +168,6 @@ namespace ElementalHeartsMod
         }
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Permanently increases maximum life by " + bonusHP);
             DisplayName.SetDefault(name);
 
             Mod.Logger.Info(tag + " initialized.");
@@ -186,10 +188,41 @@ namespace ElementalHeartsMod
 
         public override void UpdateInventory(Player player)
         {
+            if (ModContent.GetInstance<EHConfig>().MaxHearts == 1)
+            {
+                if (CanUseItem(player) == false)
+                {
+                    tooltip = "Permanently increases maximum life by " + bonusHP + "\n[Max Consumed]";
+                }
+                else
+                {
+                    tooltip = "Permanently increases maximum life by " + bonusHP;
+                }
+            }
+            else if (ModContent.GetInstance<EHConfig>().MaxHearts > 1)
+            {
+                if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
+                {
+                    tooltip = ("Permanently increases maximum life by " + bonusHP + "\n[" + (player.GetModPlayer<EHTracker>().used[tag] / bonusHP) + "/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]");
+                }
+                else
+                {
+                    tooltip = ("Permanently increases maximum life by " + bonusHP + "\n[0/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]");
+                }
+            }
+            else if (ModContent.GetInstance<EHConfig>().MaxHearts == 0)
+            {
+                tooltip = ("Permanently increases maximum life by " + bonusHP + "\n[Disabled]");
+            }
             if (player.HeldItem != Item)
             {
                 ModContent.GetInstance<EHMod>().DeleteText();
             }
+        }
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+            tooltips[2].text = tooltip;
+            //base.ModifyTooltips(tooltips);
         }
         public override void Update(ref float gravity, ref float maxFallSpeed)
         {
