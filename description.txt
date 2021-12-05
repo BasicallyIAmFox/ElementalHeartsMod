@@ -12,6 +12,13 @@ A rewritten classic mod - Elemental Hearts - adds in numerous consumable life cr
 
 Changelog:
 
+1.4
+	Hardmode hearts implemented.
+		(+30 hearts)
+	New optional info display (Similar to the cellphone), can be toggled in the config (Turned off by default).	
+		(shows how much bonus HP you are recieving from the mod)
+	Fixed+added a lot of backend code.
+
 1.3
 	Item tooltip now displays information depending on its usability.
 		[Max Consumed]: if config is untouched/set to default.

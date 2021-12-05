@@ -16,7 +16,7 @@ namespace ElementalHeartsMod
 {
     public class EHBase : ModItem
     {
-        public EHBase(int category, int station = 0, int material = 0, int rarity = -1)
+        public EHBase(int category, int station = 0, int material = 0, int rarity = -1, int val = 100)
         {
             cat = category;
             if (rarity == -1)
@@ -101,6 +101,11 @@ namespace ElementalHeartsMod
                 default:
                     break;
             }
+
+            this.backupValue = val;
+
+            currentTooltip = new TooltipLine(Mod, tag, name);
+            tooltipCreated = true;
         }
 
         public string tag;
@@ -111,11 +116,14 @@ namespace ElementalHeartsMod
         public int station;
         public int material;
 
+        public int backupValue;
+
         public string texturePath; string pathPrefix;
         public override string Texture => texturePath;
         public Color rareColor;
 
-        public string tooltip;
+        public bool tooltipCreated = false;
+        public TooltipLine currentTooltip;
 
         public override bool CanUseItem(Player player)
         {
@@ -182,7 +190,14 @@ namespace ElementalHeartsMod
         {
             Item.CloneDefaults(ItemID.LifeFruit);
             Item.rare = rarity;
-            Item.value = (int)(new Item(material).value * (CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25));
+            if(material != 0)
+            {
+                Item.value = (int)(new Item(material).value * (CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25));
+            }
+            else
+            {
+                Item.value = backupValue;
+            }
         }
         /*
         public override void ExtractinatorUse(ref int resultType, ref int resultStack)
@@ -209,11 +224,14 @@ namespace ElementalHeartsMod
             {
                 ModContent.GetInstance<EHMod>().DeleteText();
             }
+
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {           
-            tooltips[2].text = CalculateTooltip();
-            base.ModifyTooltips(tooltips);
+        {
+            if (tooltipCreated)
+            {   
+                currentTooltip.text = CalculateTooltip();
+            }
         }
         public override void Update(ref float gravity, ref float maxFallSpeed)
         {
@@ -229,7 +247,7 @@ namespace ElementalHeartsMod
                     .AddTile(station)
                     .Register();
 
-                //Return back to ingrediants.
+                //Return back to ingrediants:
                 Recipe reverse = CreateRecipe()
                     .AddIngredient(this, 1)
                     .AddTile(TileID.Extractinator);
@@ -273,4 +291,53 @@ namespace ElementalHeartsMod
             return "";
         }
     }
+    
+    public abstract class EHNPC : GlobalNPC
+    {
+        public EHNPC(int npcType, int item, bool shopLoot = true, int killsRequired = 1)
+        {
+            this.npcType = npcType;
+            this.item = item;
+            this.shopLoot = shopLoot;
+            this.killsRequired = killsRequired;
+        }
+
+        int npcType = -1;
+        int item;
+        bool shopLoot;
+        int killsRequired;
+
+        public override void SetupShop(int type, Chest shop, ref int nextSlot)
+        {
+            if (npcType == -1)
+            {
+
+            }
+            else if (type == npcType)
+            {
+                if (shopLoot)
+                {
+                    shop.item[nextSlot].SetDefaults(item);
+                    shop.item[nextSlot].shopCustomPrice = (int)(shop.item[nextSlot].value * 1.25);
+                    nextSlot++;
+                }
+
+            }
+        }
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+        {
+            if (npcType == -1)
+            {
+
+            }
+            else if (npc.type == npcType)
+            {
+                if(shopLoot == false)
+                {
+                    //npcLoot.Add()
+                }
+            }
+        }
+    }
+    
 }
