@@ -19,6 +19,7 @@ Changelog:
 		[Disabled]: if config set to 0. (For modpacks etc.)
 	New config for the shockwave. Incase you want to disable it because it is too distracting or takes too long.
 	A new file gets created in AppData/Roaming every time you save the game, with info on which hearts you have consumed. This can be used incase something horrible happens to your save file and you need to add some things back.
+	Fix with the recycle crafting recipes, hearts that are crafted by only 1 item (Such as the enchanted heart) now return the full item when you craft back. It used to craft back into nothing, but the recipe would still be there.
 
 1.2
 	Strong code Optimizations.

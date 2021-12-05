@@ -233,7 +233,7 @@ namespace ElementalHeartsMod
                 Recipe reverse = CreateRecipe()
                     .AddIngredient(this, 1)
                     .AddTile(TileID.Extractinator);
-                reverse.ReplaceResult(material, (int)(CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25));
+                reverse.ReplaceResult(material, Math.Max(1, (int)(CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25)));
                 reverse.Register();
             }
         }
