@@ -13,5 +13,8 @@ namespace ElementalHeartsMod
         [ReloadRequired]
         [Label("Max Heart Consumption (Default: 1)")]
         public int MaxHearts;
+        [DefaultValue(true)]
+        [Label("Enable Consumption Effect (Default: True)")]
+        public bool EHWaveEnabled;
     }
 }

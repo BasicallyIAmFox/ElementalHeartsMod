@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
@@ -53,6 +55,13 @@ namespace ElementalHeartsMod
             }
 
             base.SaveData(tag);
+        }
+        public override void PostSavePlayer()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string time = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString();
+            File.WriteAllLines(path + "/EHTracker-" + time + ".txt", used.Select(x => "[" + x.Key + " " + x.Value + "]").ToArray());
+            base.PostSavePlayer();
         }
         public override void LoadData(TagCompound tag)
         {

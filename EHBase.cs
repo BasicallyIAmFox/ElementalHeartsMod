@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework;
 using ElementalHeartsMod.Effects;
 using Terraria.DataStructures;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ElementalHeartsMod
 {
@@ -116,9 +117,12 @@ namespace ElementalHeartsMod
 
         public string tooltip;
 
-
         public override bool CanUseItem(Player player)
         {
+            if (ModContent.GetInstance<EHConfig>().MaxHearts == 0)
+            {
+                return false;
+            }
             if (!Filters.Scene["EHWave"].IsActive())
             {
                 if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
@@ -156,12 +160,15 @@ namespace ElementalHeartsMod
 
             if (Main.netMode != NetmodeID.Server && !Filters.Scene["EHWave"].IsActive())
             {
-                IProjectileSource source = new ProjectileSource_Item(player, Item);
+                if (ModContent.GetInstance<EHConfig>().EHWaveEnabled)
+                {
+                    IProjectileSource source = new ProjectileSource_Item(player, Item);
 
-                int waveI = Projectile.NewProjectile(source, player.Center, new Vector2(0, 0), ModContent.GetInstance<EHWave>().Type, 0, 0f, Main.myPlayer);
-                Projectile wave = Main.projectile[waveI];
-                EHWave waveProjectile = wave.ModProjectile as EHWave;
-                waveProjectile.SetWaveValues(bonusHP / 5);
+                    int waveI = Projectile.NewProjectile(source, player.Center, new Vector2(0, 0), ModContent.GetInstance<EHWave>().Type, 0, 0f, Main.myPlayer);
+                    Projectile wave = Main.projectile[waveI];
+                    EHWave waveProjectile = wave.ModProjectile as EHWave;
+                    waveProjectile.SetWaveValues(bonusHP / 5);
+                }
             }
             ModContent.GetInstance<EHMod>().DeleteText();
             return true;
@@ -169,7 +176,6 @@ namespace ElementalHeartsMod
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault(name);
-
             Mod.Logger.Info(tag + " initialized.");
         }
         public override void SetDefaults()
@@ -178,6 +184,17 @@ namespace ElementalHeartsMod
             Item.rare = rarity;
             Item.value = (int)(new Item(material).value * (CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25));
         }
+        /*
+        public override void ExtractinatorUse(ref int resultType, ref int resultStack)
+        {
+            resultType = material;
+
+            var rand = new Random();
+            double stackCountMultiplier = (rand.Next(105, 135) * .01);
+            resultStack = (int)(CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / stackCountMultiplier);
+            base.ExtractinatorUse(ref resultType, ref resultStack);
+        }
+        */
         public override void HoldItem(Player player)
         {
             if (CanUseItem(player) == true)
@@ -187,51 +204,23 @@ namespace ElementalHeartsMod
         }
 
         public override void UpdateInventory(Player player)
-        {
-            if (ModContent.GetInstance<EHConfig>().MaxHearts == 1)
-            {
-                if (CanUseItem(player) == false)
-                {
-                    tooltip = "Permanently increases maximum life by " + bonusHP + "\n[Max Consumed]";
-                }
-                else
-                {
-                    tooltip = "Permanently increases maximum life by " + bonusHP;
-                }
-            }
-            else if (ModContent.GetInstance<EHConfig>().MaxHearts > 1)
-            {
-                if (player.GetModPlayer<EHTracker>().used.ContainsKey(tag))
-                {
-                    tooltip = ("Permanently increases maximum life by " + bonusHP + "\n[" + (player.GetModPlayer<EHTracker>().used[tag] / bonusHP) + "/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]");
-                }
-                else
-                {
-                    tooltip = ("Permanently increases maximum life by " + bonusHP + "\n[0/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]");
-                }
-            }
-            else if (ModContent.GetInstance<EHConfig>().MaxHearts == 0)
-            {
-                tooltip = ("Permanently increases maximum life by " + bonusHP + "\n[Disabled]");
-            }
+        {           
             if (player.HeldItem != Item)
             {
                 ModContent.GetInstance<EHMod>().DeleteText();
             }
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            tooltips[2].text = tooltip;
-            //base.ModifyTooltips(tooltips);
+        {           
+            tooltips[2].text = CalculateTooltip();
+            base.ModifyTooltips(tooltips);
         }
         public override void Update(ref float gravity, ref float maxFallSpeed)
         {
             ModContent.GetInstance<EHMod>().DeleteText();
         }
-
         public override void AddRecipes()
         {
-
             if (material != 0)
             {
                 //Create this item:
@@ -247,6 +236,41 @@ namespace ElementalHeartsMod
                 reverse.ReplaceResult(material, (int)(CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25));
                 reverse.Register();
             }
+        }
+
+        public override bool OnPickup(Player player)
+        {
+            return base.OnPickup(player);
+        }
+        public string CalculateTooltip()
+        {
+            if (ModContent.GetInstance<EHConfig>().MaxHearts == 1)
+            {
+                if (CanUseItem(Main.LocalPlayer) == false)
+                {
+                    return "Permanently increases maximum life by " + bonusHP + "\n[Max Consumed]";
+                }
+                else
+                {
+                    return "Permanently increases maximum life by " + bonusHP;
+                }
+            }
+            else if (ModContent.GetInstance<EHConfig>().MaxHearts > 1)
+            {
+                if (Main.LocalPlayer.GetModPlayer<EHTracker>().used.ContainsKey(tag))
+                {
+                    return ("Permanently increases maximum life by " + bonusHP + "\n[" + (Main.LocalPlayer.GetModPlayer<EHTracker>().used[tag] / bonusHP) + "/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]");
+                }
+                else
+                {
+                    return ("Permanently increases maximum life by " + bonusHP + "\n[0/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]");
+                }
+            }
+            else if (ModContent.GetInstance<EHConfig>().MaxHearts == 0)
+            {
+                return ("Permanently increases maximum life by " + bonusHP + "\n[Disabled]");
+            }
+            return "";
         }
     }
 }

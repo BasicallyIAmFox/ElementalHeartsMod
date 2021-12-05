@@ -9,6 +9,11 @@ A rewritten classic mod - Elemental Hearts - adds in numerous consumable life cr
 
 Changelog:
 
+1.21
+	Item tooltip now displays information depending on its usability.
+		[Max Consumed]: if config is untouched/set to default.
+		[Amount/Max]: if config set to higher than 1.
+		[Disabled]: if config set to 0. (For modpacks etc.)
 1.2
 	Strong code Optimizations.
 	UI text demonstrating amount of potential HP earned, text doesnt show up if you can't consume another.
