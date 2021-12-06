@@ -17,7 +17,10 @@ Changelog:
 		(+30 hearts)
 	New optional info display (Similar to the cellphone), can be toggled in the config (Turned off by default).	
 		(shows how much bonus HP you are recieving from the mod)
-	Fixed+added a lot of backend code.
+	Fixed + added a lot of backend code.
+	Bestiary code + shop code implemented.
+	New settings in the config to allow you to disable/enable boss hearts or material hearts. 
+		(A use case for this can be for a modpack which likes the boss hearts feature but dont like the material hearts. Disabling material hearts ALSO disables their recipes. Disabled hearts are destroyed (sold) upon entering your inventory.)
 
 1.3
 	Item tooltip now displays information depending on its usability.

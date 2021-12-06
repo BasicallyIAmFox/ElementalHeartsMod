@@ -19,5 +19,13 @@ namespace ElementalHeartsMod
         [DefaultValue(false)]
         [Label("Show Bonus HP Info (Default: False)")]
         public bool EHInfoEnabled;
+        [DefaultValue(true)]
+        [ReloadRequired]
+        [Label("Enable Boss Hearts (Default: True)")]
+        public bool EHBossEnabled;
+        [DefaultValue(true)]
+        [ReloadRequired]
+        [Label("Enable Material Hearts (Default: True)")]
+        public bool EHMaterialEnabled;
     }
 }

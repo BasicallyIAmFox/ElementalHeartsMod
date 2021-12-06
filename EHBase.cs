@@ -11,13 +11,15 @@ using ElementalHeartsMod.Effects;
 using Terraria.DataStructures;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Terraria.GameContent.ItemDropRules;
 
 namespace ElementalHeartsMod
 {
     public class EHBase : ModItem
     {
-        public EHBase(int category, int station = 0, int material = 0, int rarity = -1, int val = 100)
+        public EHBase(int category, int station = 0, int material = 0, int rarity = -1, int val = 100, bool boss = false)
         {
+            this.boss = boss;
             cat = category;
             if (rarity == -1)
             {
@@ -33,6 +35,11 @@ namespace ElementalHeartsMod
             else
             {
                 this.rarity = rarity;
+            }
+
+            if (boss)
+            {
+                this.rarity = -11;
             }
 
             this.station = station;
@@ -56,7 +63,15 @@ namespace ElementalHeartsMod
                     pathPrefix = "ElementalHeartsMod/Assets/Items/Consumables/Hearts/PreHardmode/";
                     break;
             }
-            bonusHP = (this.rarity + 1) * 5;
+
+            if (boss)
+            {
+                bonusHP = 10;
+            }
+            else
+            {
+                bonusHP = (this.rarity + 1) * 5;
+            }
             texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
 
 
@@ -98,14 +113,15 @@ namespace ElementalHeartsMod
                 case 11:
                     rareColor = Colors.RarityDarkPurple;
                     break;
+                case -11:
+                    rareColor = Colors.RarityAmber;
+                    break;
                 default:
                     break;
             }
-
-            this.backupValue = val;
-
-            
+           this.backupValue = val;          
         }
+        public bool boss;
 
         public string tag;
         public string name;
@@ -125,6 +141,20 @@ namespace ElementalHeartsMod
 
         public override bool CanUseItem(Player player)
         {
+            if (boss)
+            {
+                if (!ModContent.GetInstance<EHConfig>().EHBossEnabled)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (!ModContent.GetInstance<EHConfig>().EHMaterialEnabled)
+                {
+                    return false;
+                }
+            }
             if (ModContent.GetInstance<EHConfig>().MaxHearts == 0)
             {
                 return false;
@@ -217,12 +247,27 @@ namespace ElementalHeartsMod
         }
 
         public override void UpdateInventory(Player player)
-        {           
+        {
             if (player.HeldItem != Item)
             {
                 ModContent.GetInstance<EHMod>().DeleteText();
             }
-
+            if (boss)
+            {
+                if (!ModContent.GetInstance<EHConfig>().EHBossEnabled)
+                {
+                    player.SellItem(Item);
+                    Item.TurnToAir();
+                }
+            }
+            else
+            {
+                if (!ModContent.GetInstance<EHConfig>().EHMaterialEnabled)
+                {
+                    player.SellItem(Item);
+                    Item.TurnToAir();
+                }
+            }
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
@@ -243,20 +288,27 @@ namespace ElementalHeartsMod
         }
         public override void AddRecipes()
         {
-            if (material != 0)
+            if (!boss)
             {
-                //Create this item:
-                CreateRecipe(1)
-                    .AddIngredient(material, CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material])
-                    .AddTile(station)
-                    .Register();
+                if (!ModContent.GetInstance<EHConfig>().EHMaterialEnabled)
+                {
 
-                //Return back to ingrediants:
-                Recipe reverse = CreateRecipe()
-                    .AddIngredient(this, 1)
-                    .AddTile(TileID.Extractinator);
-                reverse.ReplaceResult(material, Math.Max(1, (int)(CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25)));
-                reverse.Register();
+                }
+                else if (material != 0)
+                {
+                    //Create this item:
+                    CreateRecipe(1)
+                        .AddIngredient(material, CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material])
+                        .AddTile(station)
+                        .Register();
+
+                    //Return back to ingrediants:
+                    Recipe reverse = CreateRecipe()
+                        .AddIngredient(this, 1)
+                        .AddTile(TileID.Extractinator);
+                    reverse.ReplaceResult(material, Math.Max(1, (int)(CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25)));
+                    reverse.Register();
+                }
             }
         }
 
@@ -266,6 +318,20 @@ namespace ElementalHeartsMod
         }
         public string CalculateTooltip()
         {
+            if (boss)
+            {
+                if (!ModContent.GetInstance<EHConfig>().EHBossEnabled)
+                {
+                    return "Permanently increases maximum life by " + bonusHP + "\n[Boss Hearts Disabled]";
+                }
+            }
+            else
+            {
+                if (!ModContent.GetInstance<EHConfig>().EHMaterialEnabled)
+                {
+                    return "Permanently increases maximum life by " + bonusHP + "\n[Material Hearts Disabled]";
+                }
+            }
             if (ModContent.GetInstance<EHConfig>().MaxHearts == 1)
             {
                 if (CanUseItem(Main.LocalPlayer) == false)
@@ -306,23 +372,19 @@ namespace ElementalHeartsMod
             this.killsRequired = killsRequired;
         }
 
-        int npcType = -1;
+        int npcType;
         int item;
         bool shopLoot;
         int killsRequired;
 
         public override void SetupShop(int type, Chest shop, ref int nextSlot)
         {
-            if (npcType == -1)
-            {
-
-            }
-            else if (type == npcType)
+            if (type == npcType)
             {
                 if (shopLoot)
                 {
                     shop.item[nextSlot].SetDefaults(item);
-                    shop.item[nextSlot].shopCustomPrice = (int)(shop.item[nextSlot].value * 1.25);
+                    shop.item[nextSlot].shopCustomPrice = (int)(shop.item[nextSlot].value);
                     nextSlot++;
                 }
 
@@ -330,18 +392,13 @@ namespace ElementalHeartsMod
         }
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            if (npcType == -1)
-            {
-
-            }
-            else if (npc.type == npcType)
+            if (npc.type == npcType)
             {
                 if(shopLoot == false)
                 {
-                    //npcLoot.Add()
+                    npcLoot.Add(ItemDropRule.Common(item));
                 }
             }
         }
-    }
-    
+    }  
 }
