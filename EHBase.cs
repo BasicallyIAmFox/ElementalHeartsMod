@@ -104,8 +104,7 @@ namespace ElementalHeartsMod
 
             this.backupValue = val;
 
-            currentTooltip = new TooltipLine(Mod, tag, name);
-            tooltipCreated = true;
+            
         }
 
         public string tag;
@@ -123,7 +122,6 @@ namespace ElementalHeartsMod
         public Color rareColor;
 
         public bool tooltipCreated = false;
-        public TooltipLine currentTooltip;
 
         public override bool CanUseItem(Player player)
         {
@@ -228,9 +226,15 @@ namespace ElementalHeartsMod
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
+            if(tooltipCreated == false)
+            {
+                TooltipLine currentTooltip = new TooltipLine(Mod, tag, name);
+                tooltips.Add(currentTooltip);
+                tooltipCreated = true;
+            }
             if (tooltipCreated)
-            {   
-                currentTooltip.text = CalculateTooltip();
+            {
+                tooltips.Find(_ => _.Name == tag).text = CalculateTooltip();
             }
         }
         public override void Update(ref float gravity, ref float maxFallSpeed)
