@@ -87,6 +87,8 @@ namespace ElementalHeartsMod
     {
         public class Boss
         {
+            public class EyeOfCthulu : EHBase { public EyeOfCthulu() : base(1, boss: true) { } } public class EyeOfCthuluNPC : EHNPC { public EyeOfCthuluNPC() : base(NPCID.EyeofCthulhu, ModContent.ItemType<EyeOfCthulu>(), false) { } }
+
         }
         public class Hardmode
         {
@@ -94,16 +96,28 @@ namespace ElementalHeartsMod
             public class Bubble : EHBase { public Bubble() : base(2, TileID.BubbleMachine, ItemID.Bubble) { } }
             public class Chlorophyte : EHBase { public Chlorophyte() : base(2, TileID.MythrilAnvil, ItemID.ChlorophyteOre) { } }
             public class Cobalt : EHBase { public Cobalt() : base(2, TileID.Furnaces, ItemID.CobaltOre) { } }
-            public class Cog : EHBase { public Cog() : base(2, 0, 0, 0, 1000000) { } }
-            public class CogShop : EHNPC { public CogShop() : base(NPCID.Steampunker, ModContent.ItemType<Cog>()) { } }
-            //public class Bubble : EHBase { public Bubble() : base(2, TileID.BubbleMachine, ItemID.Bubble) { } }
-            //public class Bubble : EHBase { public Bubble() : base(2, TileID.BubbleMachine, ItemID.Bubble) { } }
-
+            public class Cog : EHBase { public Cog() : base(2, val: 1000000) { } } public class CogNPC : EHNPC { public CogNPC() : base(NPCID.Steampunker, ModContent.ItemType<Cog>()) { } }
+            public class Crystal : EHBase { public Crystal() : base(2, TileID.MythrilAnvil, ItemID.CrystalShard) { } }
+            public class CursedFlame : EHBase { public CursedFlame() : base(2, TileID.CrystalBall, ItemID.CursedFlame) { } }
+            public class Discord : EHBase { public Discord() : base(2, TileID.DemonAltar, ItemID.RodofDiscord) { } }
+            public class Ectoplasm : EHBase { public Ectoplasm() : base(2, TileID.CrystalBall, ItemID.Ectoplasm) { } }
             public class Flesh : EHBase { public Flesh() : base(2, TileID.FleshCloningVat, ItemID.FleshBlock) { } }
-
+            public class Flight : EHBase { public Flight() : base(2, TileID.MythrilAnvil, ItemID.SoulofFlight) { } }
+            public class Ichor : EHBase { public Ichor() : base(2, TileID.CrystalBall, ItemID.Ichor) { } }
             public class Lesion : EHBase { public Lesion() : base(2, TileID.LesionStation, ItemID.LesionBlock) { } }
+            public class Light : EHBase { public Light() : base(2, TileID.MythrilAnvil, ItemID.SoulofLight) { } }
             public class Luminite : EHBase { public Luminite() : base(2, TileID.LunarCraftingStation, ItemID.LunarOre) { } }
-
+            public class Mythril : EHBase { public Mythril() : base(2, TileID.MythrilAnvil, ItemID.MythrilOre) { } }
+            public class Night : EHBase { public Night() : base(2, TileID.MythrilAnvil, ItemID.SoulofNight) { } }
+            public class Orichalcum : EHBase { public Orichalcum() : base(2, TileID.MythrilAnvil, ItemID.OrichalcumAnvil) { } }
+            public class Palladium : EHBase { public Palladium() : base(2, TileID.Furnaces, ItemID.OrichalcumAnvil) { } }
+            public class Pearlsand : EHBase { public Pearlsand() : base(2, TileID.HeavyWorkBench, ItemID.PearlsandBlock) { } }
+            public class Pearlstone : EHBase { public Pearlstone() : base(2, TileID.Furnaces, ItemID.PearlstoneBlock) { } }
+            public class Pearlwood : EHBase { public Pearlwood() : base(2, TileID.Trees, ItemID.PearlstoneBlock) { } }
+            public class PinkIce : EHBase { public PinkIce() : base(2, TileID.IceMachine, ItemID.PinkIceBlock) { } }
+            public class Rainbow : EHBase { public Rainbow() : base(2, TileID.Anvils, ItemID.RainbowBrick, rainbowEffect: true) { } }
+            public class SpookyWood : EHBase { public SpookyWood() : base(2, TileID.Trees, ItemID.SpookyWood) { } }
+            public class Titanium : EHBase { public Titanium() : base(2, TileID.AdamantiteForge, ItemID.TitaniumOre) { } }
         }
         public class Other
         {

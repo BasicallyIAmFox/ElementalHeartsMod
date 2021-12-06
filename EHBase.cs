@@ -17,7 +17,7 @@ namespace ElementalHeartsMod
 {
     public class EHBase : ModItem
     {
-        public EHBase(int category, int station = 0, int material = 0, int rarity = -1, int val = 100, bool boss = false)
+        public EHBase(int category, int station = 0, int material = 0, int rarity = -1, int val = 100, bool boss = false, bool rainbowEffect = false)
         {
             this.boss = boss;
             cat = category;
@@ -119,7 +119,8 @@ namespace ElementalHeartsMod
                 default:
                     break;
             }
-           this.backupValue = val;          
+            this.backupValue = val;
+            this.rainbowEffect = rainbowEffect;
         }
         public bool boss;
 
@@ -139,6 +140,7 @@ namespace ElementalHeartsMod
 
         public bool tooltipCreated = false;
 
+        public bool rainbowEffect;
         public override bool CanUseItem(Player player)
         {
             if (boss)
@@ -360,6 +362,15 @@ namespace ElementalHeartsMod
             }
             return "";
         }
+        public override Color? GetAlpha(Color lightColor)
+        {
+            if (rainbowEffect)
+            {
+                return Main.DiscoColor;
+            }
+            else return lightColor;
+        }
+
     }
     
     public abstract class EHNPC : GlobalNPC
