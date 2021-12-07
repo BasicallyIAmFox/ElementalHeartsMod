@@ -1,5 +1,5 @@
 displayName = Elemental Hearts
 author = Vincent Jenei (Lite#4249)
-version = 1.4
+version = 1.5
 homepage = https://discord.gg/WHMg38mXs8
 buildIgnore = *.csproj, *.sln, *.user, *.md, obj\*, bin\*, .vs\*, .git\*, Previews\*, .gitignore

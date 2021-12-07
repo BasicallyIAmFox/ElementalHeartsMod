@@ -17,7 +17,7 @@ Changelog:
 		(+21 hearts)
 	Rewrote the saving and loading code.
 		Player data doesn't get reset after every update/reload anymore! :)
-		This gives the .txt file in Appdata/Roaming less value, but I will keep it there incase something happens and the player wants to get back what they lost.
+			This gives the .txt file in Appdata/Roaming less value, but I will keep it there incase something happens and the player wants to get back what they lost.
 
 1.4
 	Hardmode hearts implemented.
