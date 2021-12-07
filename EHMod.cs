@@ -45,10 +45,10 @@ namespace ElementalHeartsMod
         {
             EHUIS.RemoveAllChildren();
         }
-        internal enum PacketType : byte
-        {
-            SyncPlayer
-        }
+        //internal enum PacketType : byte
+        //{
+            //SyncPlayer
+        //}
     }
 
     public class EHModSystem : ModSystem
@@ -87,16 +87,53 @@ namespace ElementalHeartsMod
     {
         public class Boss
         {
-            public class EyeOfCthulu : EHBase { public EyeOfCthulu() : base(1, boss: true) { } } public class EyeOfCthuluNPC : EHNPC { public EyeOfCthuluNPC() : base(NPCID.EyeofCthulhu, ModContent.ItemType<EyeOfCthulu>(), false) { } }
-
+            public class Betsy : EHBase { public Betsy() : base(1, boss: true) { } }
+            public class BetsyNPC : EHNPC { public BetsyNPC() : base(NPCID.DD2Betsy, ModContent.ItemType<Betsy>(), false) { } }
+            public class BrainOfCthulu : EHBase { public BrainOfCthulu() : base(1, boss: true) { } }
+            public class BrainOfCthuluNPC : EHNPC { public BrainOfCthuluNPC() : base(NPCID.BrainofCthulhu, ModContent.ItemType<BrainOfCthulu>(), false) { } }
+            public class DukeFishron : EHBase { public DukeFishron() : base(1, boss: true) { } }
+            public class DukeFishronNPC : EHNPC { public DukeFishronNPC() : base(NPCID.DukeFishron, ModContent.ItemType<DukeFishron>(), false) { } }
+            public class EaterOfWorlds : EHBase { public EaterOfWorlds() : base(1, TileID.DemonAltar, ItemID.ShadowScale, boss: true) { } }
+            public class EmpressOfLight : EHBase { public EmpressOfLight() : base(1, boss: true) { } }
+            public class EmpressOfLightNPC : EHNPC { public EmpressOfLightNPC() : base(NPCID.EmpressButterfly, ModContent.ItemType<EmpressOfLight>(), false) { } }
+            public class EyeOfCthulu : EHBase { public EyeOfCthulu() : base(1, boss: true) { } }
+            public class EyeOfCthuluNPC : EHNPC { public EyeOfCthuluNPC() : base(NPCID.EyeofCthulhu, ModContent.ItemType<EyeOfCthulu>(), false) { } }
+            public class FlyingDutchman : EHBase { public FlyingDutchman() : base(1, boss: true) { } }
+            public class FlyingDutchmanNPC : EHNPC { public FlyingDutchmanNPC() : base(NPCID.PirateShip, ModContent.ItemType<FlyingDutchman>(), false) { } }
+            public class Golem : EHBase { public Golem() : base(1, boss: true) { } }
+            public class GolemNPC : EHNPC { public GolemNPC() : base(NPCID.Golem, ModContent.ItemType<Golem>(), false) { } }
+            public class KingSlime : EHBase { public KingSlime() : base(1, boss: true) { } }
+            public class KingSlimeNPC : EHNPC { public KingSlimeNPC() : base(NPCID.KingSlime, ModContent.ItemType<KingSlime>(), false) { } }
+            public class LunaticCultist : EHBase { public LunaticCultist() : base(1, boss: true) { } }
+            public class LunaticCultistNPC : EHNPC { public LunaticCultistNPC() : base(NPCID.CultistBoss, ModContent.ItemType<LunaticCultist>(), false) { } }
+            public class MartianSaucer : EHBase { public MartianSaucer() : base(1, boss: true) { } }
+            public class MartianSaucerNPC : EHNPC { public MartianSaucerNPC() : base(NPCID.MartianSaucer, ModContent.ItemType<MartianSaucer>(), false) { } }
+            public class MoonLord : EHBase { public MoonLord() : base(1, boss: true) { } }
+            public class MoonLordNPC : EHNPC { public MoonLordNPC() : base(NPCID.MoonLordCore, ModContent.ItemType<MoonLord>(), false) { } }
+            public class Plantera : EHBase { public Plantera() : base(1, boss: true) { } }
+            public class PlanteraNPC : EHNPC { public PlanteraNPC() : base(NPCID.Plantera, ModContent.ItemType<Plantera>(), false) { } }
+            public class QueenBee : EHBase { public QueenBee() : base(1, boss: true) { } }
+            public class QueenBeeNPC : EHNPC { public QueenBeeNPC() : base(NPCID.QueenBee, ModContent.ItemType<QueenBee>(), false) { } }
+            public class QueenSlime : EHBase { public QueenSlime() : base(1, boss: true) { } }
+            public class QueenSlimeNPC : EHNPC { public QueenSlimeNPC() : base(NPCID.QueenSlimeBoss, ModContent.ItemType<QueenSlime>(), false) { } }
+            public class Skeletron : EHBase { public Skeletron() : base(1, boss: true) { } }
+            public class SkeletronNPC : EHNPC { public SkeletronNPC() : base(NPCID.SkeletronHead, ModContent.ItemType<Skeletron>(), false) { } }
+            public class SoulOfFright : EHBase { public SoulOfFright() : base(1, boss: true) { } }
+            public class SoulOfFrightNPC : EHNPC { public SoulOfFrightNPC() : base(NPCID.SkeletronPrime, ModContent.ItemType<SoulOfFright>(), false) { } }
+            public class SoulOfMight : EHBase { public SoulOfMight() : base(1, boss: true) { } }
+            public class SoulOfMightNPC : EHNPC { public SoulOfMightNPC() : base(NPCID.TheDestroyer, ModContent.ItemType<SoulOfMight>(), false) { } }
+            public class SoulOfSight : EHBase { public SoulOfSight() : base(1, boss: true) { } }
+            public class SoulOfSightNPC : EHNPC { public SoulOfSightNPC() : base(NPCID.Eyezor, ModContent.ItemType<SoulOfSight>(), false) { } }
         }
         public class Hardmode
         {
             public class Adamantite : EHBase { public Adamantite() : base(2, TileID.AdamantiteForge, ItemID.AdamantiteOre) { } }
-            public class Bubble : EHBase { public Bubble() : base(2, TileID.BubbleMachine, ItemID.Bubble) { } }
+            public class Bubble : EHBase { public Bubble() : base(2, val:1000000) { } }
+            public class BubbleNPC : EHNPC { public BubbleNPC() : base(NPCID.PartyGirl, ModContent.ItemType<Bubble>()) { } }
             public class Chlorophyte : EHBase { public Chlorophyte() : base(2, TileID.MythrilAnvil, ItemID.ChlorophyteOre) { } }
             public class Cobalt : EHBase { public Cobalt() : base(2, TileID.Furnaces, ItemID.CobaltOre) { } }
-            public class Cog : EHBase { public Cog() : base(2, val: 1000000) { } } public class CogNPC : EHNPC { public CogNPC() : base(NPCID.Steampunker, ModContent.ItemType<Cog>()) { } }
+            public class Cog : EHBase { public Cog() : base(2, val: 1000000) { } }
+            public class CogNPC : EHNPC { public CogNPC() : base(NPCID.Steampunker, ModContent.ItemType<Cog>()) { } }
             public class Crystal : EHBase { public Crystal() : base(2, TileID.MythrilAnvil, ItemID.CrystalShard) { } }
             public class CursedFlame : EHBase { public CursedFlame() : base(2, TileID.CrystalBall, ItemID.CursedFlame) { } }
             public class Discord : EHBase { public Discord() : base(2, TileID.DemonAltar, ItemID.RodofDiscord) { } }

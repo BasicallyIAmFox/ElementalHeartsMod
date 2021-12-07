@@ -1,4 +1,4 @@
-A rewritten classic mod - Elemental Hearts - adds in numerous consumable life crystals crafted using the various elements found across the game. 
+A rewritten classic mod - Elemental Hearts - adds in numerous consumable life crystals crafted using the various elements found across the game, bought from NPCs, or rewarded for killing bosses. 
 
 	Quality > Quantity
 	Great addition to any modded playthrough.
@@ -8,9 +8,16 @@ A rewritten classic mod - Elemental Hearts - adds in numerous consumable life cr
 
 	Discord Link: https://discord.gg/WHMg38mXs8
 
-	Warning: This mod's player data gets reset after every update. Backup .txt files of your player's information can be found at AppData/Roaming.
+	Note: This mod was written in and for 1.4. If you still are on 1.3, this mod was backported and some features will be missing.
 
 Changelog:
+
+1.5
+	Boss hearts implemented.
+		(+21 hearts)
+	Rewrote the saving and loading code.
+		Player data doesn't get reset after every update/reload anymore! :)
+		This gives the .txt file in Appdata/Roaming less value, but I will keep it there incase something happens and the player wants to get back what they lost.
 
 1.4
 	Hardmode hearts implemented.
