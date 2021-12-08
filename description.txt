@@ -6,9 +6,9 @@ A rewritten classic mod - Elemental Hearts - adds in numerous consumable life cr
 	Spreads with progression.
 	Simply complex.
 
-	Discord Link: https://discord.gg/WHMg38mXs8
+Discord Link: https://discord.gg/WHMg38mXs8
 
-	Note: This mod was written in and for 1.4. If you still are on 1.3, this mod was backported and some features will be missing.
+Note: This mod was written in and for 1.4. If you still are on 1.3, this mod was backported and some features will be missing.
 
 Changelog:
 
