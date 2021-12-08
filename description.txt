@@ -12,6 +12,8 @@ Note: This mod was written in and for 1.4. If you still are on 1.3, this mod was
 
 Changelog:
 
+1.51
+	Code Formatting.
 1.5
 	Boss hearts implemented.
 		(+21 hearts)

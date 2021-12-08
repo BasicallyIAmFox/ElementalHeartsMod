@@ -45,10 +45,6 @@ namespace ElementalHeartsMod
         {
             EHUIS.RemoveAllChildren();
         }
-        //internal enum PacketType : byte
-        //{
-            //SyncPlayer
-        //}
     }
 
     public class EHModSystem : ModSystem
