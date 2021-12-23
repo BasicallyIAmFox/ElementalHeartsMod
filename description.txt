@@ -9,9 +9,12 @@ A rewritten classic mod - Elemental Hearts - adds in numerous consumable life cr
 Discord Link: https://discord.gg/WHMg38mXs8
 
 Note: This mod was written in and for 1.4. If you still are on 1.3, this mod was backported and some features will be missing.
+Also Note: The recipe browser shows "Tree" for the crafting station to make the gem hearts. They are actually crafted at each respective gem tree.
 
 Changelog:
 
+1.52
+	Fix description.
 1.51
 	Code Formatting.
 1.5
