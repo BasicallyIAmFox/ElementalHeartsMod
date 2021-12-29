@@ -13,6 +13,8 @@ Also Note: The recipe browser shows "Tree" for the crafting station to make the 
 
 Changelog:
 
+1.53
+	Journey Mode code.
 1.52
 	Fix description.
 1.51
