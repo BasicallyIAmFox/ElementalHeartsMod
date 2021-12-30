@@ -5,7 +5,6 @@ using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using static ElementalHeartsMod.EHMod;
 
 namespace ElementalHeartsMod
 {
@@ -15,7 +14,7 @@ namespace ElementalHeartsMod
 
         public override void ResetEffects()
         {
-            if(used != null)
+            if (used != null)
             {
                 foreach (KeyValuePair<string, int> usedEH in used)
                 {
@@ -35,7 +34,7 @@ namespace ElementalHeartsMod
         {
             foreach (KeyValuePair<string, int> usedEH in used)
             {
-               tag.Add(usedEH.Key, usedEH.Value);
+                tag.Add(usedEH.Key, usedEH.Value);
             }
         }
         public override void PostSavePlayer()

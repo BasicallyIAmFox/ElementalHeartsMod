@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
+﻿using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,10 +23,10 @@ namespace ElementalHeartsMod.Effects
             Projectile.timeLeft = 333;
         }
 
-        public float rippleCount;       
+        public float rippleCount;
         public float rippleSize;
         public float rippleSpeed;
-        
+
         public float distortStrength = 333f;
         public int initialStrength = 333;
         public void SetWaveValues(int count = 1, int size = 30)

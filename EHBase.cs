@@ -1,23 +1,21 @@
-﻿using Terraria.Graphics.Effects;
+﻿using ElementalHeartsMod.Effects;
+using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Threading;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using ElementalHeartsMod.Effects;
-using Terraria.DataStructures;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Terraria.GameContent.ItemDropRules;
 
 namespace ElementalHeartsMod
 {
     public class EHBase : ModItem
     {
-        public EHBase(int category, int station = 0, int material = 0, int rarity = -1, int val = 100, bool boss = false, bool rainbowEffect = false)
+        public EHBase(int category, int station = 0, int material = 0, int rarity = -1, int val = 100, bool boss = false, bool rainbowEffect = false, string optionalTooltip = "disabled", string overideName = "disabled")
         {
             this.boss = boss;
             cat = category;
@@ -46,7 +44,15 @@ namespace ElementalHeartsMod
             this.material = material;
 
             tag = Regex.Replace(GetType().Name, "[A-Z]", " $0").Trim();
-            name = (tag + " Heart");
+
+            if(overideName == "disabled")
+            {
+                name = (tag + " Heart");
+            } 
+            else
+            { 
+                name = (overideName + " Heart");
+            }
 
             switch (cat)
             {
@@ -121,6 +127,8 @@ namespace ElementalHeartsMod
             }
             this.backupValue = val;
             this.rainbowEffect = rainbowEffect;
+
+            optionalTip = optionalTooltip;
         }
         public bool boss;
 
@@ -141,6 +149,8 @@ namespace ElementalHeartsMod
         public bool tooltipCreated = false;
 
         public bool rainbowEffect;
+
+        public string optionalTip;
         public override bool CanUseItem(Player player)
         {
             if (boss)
@@ -222,7 +232,7 @@ namespace ElementalHeartsMod
         {
             Item.CloneDefaults(ItemID.LifeFruit);
             Item.rare = rarity;
-            if(material != 0)
+            if (material != 0)
             {
                 Item.value = (int)(new Item(material).value * (CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[material] / 1.25));
             }
@@ -275,7 +285,7 @@ namespace ElementalHeartsMod
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            if(tooltipCreated == false)
+            if (tooltipCreated == false)
             {
                 TooltipLine currentTooltip = new TooltipLine(Mod, tag, name);
                 tooltips.Add(currentTooltip);
@@ -326,41 +336,92 @@ namespace ElementalHeartsMod
             {
                 if (!ModContent.GetInstance<EHConfig>().EHBossEnabled)
                 {
-                    return "Permanently increases maximum life by " + bonusHP + "\n[Boss Hearts Disabled]";
+                    if (optionalTip == "disabled")
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n[Boss Hearts Disabled]";
+                    }
+                    else
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n" + optionalTip + "\n[Boss Hearts Disabled]";
+
+                    }
                 }
             }
             else
             {
                 if (!ModContent.GetInstance<EHConfig>().EHMaterialEnabled)
                 {
-                    return "Permanently increases maximum life by " + bonusHP + "\n[Material Hearts Disabled]";
+                    if (optionalTip == "disabled")
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n[Material Hearts Disabled]";
+                    }
+                    else
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n" + optionalTip + "\n[Material Hearts Disabled]";
+
+                    }
                 }
             }
             if (ModContent.GetInstance<EHConfig>().MaxHearts == 1)
             {
                 if (CanUseItem(Main.LocalPlayer) == false)
                 {
-                    return "Permanently increases maximum life by " + bonusHP + "\n[Max Consumed]";
+                    if (optionalTip == "disabled")
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n[Max Consumed]";
+                    }
+                    else
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n" + optionalTip + "\n[Max Consumed]";
+                    }
                 }
                 else
                 {
-                    return "Permanently increases maximum life by " + bonusHP;
+                    if (optionalTip == "disabled")
+                    {
+                        return "Permanently increases maximum life by " + bonusHP;
+                    }
+                    else
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n" + optionalTip;
+                    }
                 }
             }
             else if (ModContent.GetInstance<EHConfig>().MaxHearts > 1)
             {
                 if (Main.LocalPlayer.GetModPlayer<EHTracker>().used.ContainsKey(tag))
                 {
-                    return ("Permanently increases maximum life by " + bonusHP + "\n[" + (Main.LocalPlayer.GetModPlayer<EHTracker>().used[tag] / bonusHP) + "/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]");
+                    if (optionalTip == "disabled")
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n[" + (Main.LocalPlayer.GetModPlayer<EHTracker>().used[tag] / bonusHP) + "/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]";
+                    }
+                    else
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n" + optionalTip + "\n[" + (Main.LocalPlayer.GetModPlayer<EHTracker>().used[tag] / bonusHP) + "/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]";
+                    }
                 }
                 else
                 {
-                    return ("Permanently increases maximum life by " + bonusHP + "\n[0/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]");
+                    if (optionalTip == "disabled")
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n[0/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]";
+                    }
+                    else
+                    {
+                        return "Permanently increases maximum life by " + bonusHP + "\n" + optionalTip + "\n[0/" + ModContent.GetInstance<EHConfig>().MaxHearts + "]";
+                    }
                 }
             }
             else if (ModContent.GetInstance<EHConfig>().MaxHearts == 0)
             {
-                return ("Permanently increases maximum life by " + bonusHP + "\n[Disabled]");
+                if (optionalTip == "disabled")
+                {
+                    return "Permanently increases maximum life by " + bonusHP + "\n[Disabled]";
+                }
+                else
+                {
+                    return "Permanently increases maximum life by " + bonusHP + "\n" + optionalTip + "\n[Disabled]";
+                }
             }
             return "";
         }
@@ -374,7 +435,7 @@ namespace ElementalHeartsMod
         }
 
     }
-    
+
     public abstract class EHNPC : GlobalNPC
     {
         public EHNPC(int npcType, int item, bool shopLoot = true, int killsRequired = 1)
@@ -407,11 +468,11 @@ namespace ElementalHeartsMod
         {
             if (npc.type == npcType)
             {
-                if(shopLoot == false)
+                if (shopLoot == false)
                 {
                     npcLoot.Add(ItemDropRule.Common(item));
                 }
             }
         }
-    }  
+    }
 }

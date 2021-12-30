@@ -1,15 +1,12 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.Graphics.Effects;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
-using ElementalHeartsMod;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using Terraria.DataStructures;
-using Microsoft.Xna.Framework.Graphics;
-
-using Terraria.Graphics.Shaders;
-using Terraria.Graphics.Effects;
 
 namespace ElementalHeartsMod
 {
@@ -85,15 +82,15 @@ namespace ElementalHeartsMod
         {
             public class Betsy : EHBase { public Betsy() : base(1, boss: true) { } }
             public class BetsyNPC : EHNPC { public BetsyNPC() : base(NPCID.DD2Betsy, ModContent.ItemType<Betsy>(), false) { } }
-            public class BrainOfCthulu : EHBase { public BrainOfCthulu() : base(1, boss: true) { } }
-            public class BrainOfCthuluNPC : EHNPC { public BrainOfCthuluNPC() : base(NPCID.BrainofCthulhu, ModContent.ItemType<BrainOfCthulu>(), false) { } }
+            public class BrainOfCthulhu : EHBase { public BrainOfCthulhu() : base(1, boss: true, overideName: "Brain of Cthulhu") { } }
+            public class BrainOfCthulhuNPC : EHNPC { public BrainOfCthulhuNPC() : base(NPCID.BrainofCthulhu, ModContent.ItemType<BrainOfCthulhu>(), false) { } }
             public class DukeFishron : EHBase { public DukeFishron() : base(1, boss: true) { } }
             public class DukeFishronNPC : EHNPC { public DukeFishronNPC() : base(NPCID.DukeFishron, ModContent.ItemType<DukeFishron>(), false) { } }
-            public class EaterOfWorlds : EHBase { public EaterOfWorlds() : base(1, TileID.DemonAltar, ItemID.ShadowScale, boss: true) { } }
-            public class EmpressOfLight : EHBase { public EmpressOfLight() : base(1, boss: true) { } }
+            public class EaterOfWorlds : EHBase { public EaterOfWorlds() : base(1, TileID.DemonAltar, ItemID.ShadowScale, boss: true, overideName: "Eater of Worlds") { } }
+            public class EmpressOfLight : EHBase { public EmpressOfLight() : base(1, boss: true, overideName: "Empress of Light") { } }
             public class EmpressOfLightNPC : EHNPC { public EmpressOfLightNPC() : base(NPCID.EmpressButterfly, ModContent.ItemType<EmpressOfLight>(), false) { } }
-            public class EyeOfCthulu : EHBase { public EyeOfCthulu() : base(1, boss: true) { } }
-            public class EyeOfCthuluNPC : EHNPC { public EyeOfCthuluNPC() : base(NPCID.EyeofCthulhu, ModContent.ItemType<EyeOfCthulu>(), false) { } }
+            public class EyeOfCthulhu : EHBase { public EyeOfCthulhu() : base(1, boss: true, overideName: "Eye of Cthulhu") { } }
+            public class EyeOfCthulhuNPC : EHNPC { public EyeOfCthulhuNPC() : base(NPCID.EyeofCthulhu, ModContent.ItemType<EyeOfCthulhu>(), false) { } }
             public class FlyingDutchman : EHBase { public FlyingDutchman() : base(1, boss: true) { } }
             public class FlyingDutchmanNPC : EHNPC { public FlyingDutchmanNPC() : base(NPCID.PirateShip, ModContent.ItemType<FlyingDutchman>(), false) { } }
             public class Golem : EHBase { public Golem() : base(1, boss: true) { } }
@@ -114,17 +111,17 @@ namespace ElementalHeartsMod
             public class QueenSlimeNPC : EHNPC { public QueenSlimeNPC() : base(NPCID.QueenSlimeBoss, ModContent.ItemType<QueenSlime>(), false) { } }
             public class Skeletron : EHBase { public Skeletron() : base(1, boss: true) { } }
             public class SkeletronNPC : EHNPC { public SkeletronNPC() : base(NPCID.SkeletronHead, ModContent.ItemType<Skeletron>(), false) { } }
-            public class SoulOfFright : EHBase { public SoulOfFright() : base(1, boss: true) { } }
+            public class SoulOfFright : EHBase { public SoulOfFright() : base(1, boss: true, overideName: "Fright") { } }
             public class SoulOfFrightNPC : EHNPC { public SoulOfFrightNPC() : base(NPCID.SkeletronPrime, ModContent.ItemType<SoulOfFright>(), false) { } }
-            public class SoulOfMight : EHBase { public SoulOfMight() : base(1, boss: true) { } }
+            public class SoulOfMight : EHBase { public SoulOfMight() : base(1, boss: true, overideName: "Might") { } }
             public class SoulOfMightNPC : EHNPC { public SoulOfMightNPC() : base(NPCID.TheDestroyer, ModContent.ItemType<SoulOfMight>(), false) { } }
-            public class SoulOfSight : EHBase { public SoulOfSight() : base(1, boss: true) { } }
+            public class SoulOfSight : EHBase { public SoulOfSight() : base(1, boss: true, overideName: "Sight") { } }
             public class SoulOfSightNPC : EHNPC { public SoulOfSightNPC() : base(NPCID.Eyezor, ModContent.ItemType<SoulOfSight>(), false) { } }
         }
         public class Hardmode
         {
             public class Adamantite : EHBase { public Adamantite() : base(2, TileID.AdamantiteForge, ItemID.AdamantiteOre) { } }
-            public class Bubble : EHBase { public Bubble() : base(2, val:1000000) { } }
+            public class Bubble : EHBase { public Bubble() : base(2, val: 1000000) { } }
             public class BubbleNPC : EHNPC { public BubbleNPC() : base(NPCID.PartyGirl, ModContent.ItemType<Bubble>()) { } }
             public class Chlorophyte : EHBase { public Chlorophyte() : base(2, TileID.MythrilAnvil, ItemID.ChlorophyteOre) { } }
             public class Cobalt : EHBase { public Cobalt() : base(2, TileID.Furnaces, ItemID.CobaltOre) { } }
@@ -185,6 +182,7 @@ namespace ElementalHeartsMod
             public class Ice : EHBase { public Ice() : base(4, TileID.IceMachine, ItemID.IceBlock) { } }
             public class Iron : EHBase { public Iron() : base(4, TileID.Furnaces, ItemID.IronOre) { } }
             public class Lead : EHBase { public Lead() : base(4, TileID.Furnaces, ItemID.LeadOre) { } }
+            public class LifeCrystal : EHBase { public LifeCrystal() : base(4, TileID.DemonAltar, ItemID.LifeCrystal, rarity: 4, optionalTooltip: "Dedicated to AdamChromeE!") { } }
             public class Marble : EHBase { public Marble() : base(4, TileID.WorkBenches, ItemID.Marble) { } }
             public class Meteorite : EHBase { public Meteorite() : base(4, TileID.Furnaces, ItemID.Meteorite) { } }
             public class Mushroom : EHBase { public Mushroom() : base(4, TileID.Sawmill, ItemID.GlowingMushroom) { } }

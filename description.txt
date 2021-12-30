@@ -13,6 +13,16 @@ Also Note: The recipe browser shows "Tree" for the crafting station to make the 
 
 Changelog:
 
+1.6
+	Life Crystal Heart - Dedicated to AdamChromeE! Thank you for making a mod review!
+	Code Cleanup.
+	Names which used to be like: "Eye Of Cthulu", is now: "Eye of Cthulu".
+	Soul Of Fright Heart => Fright Heart.
+	Soul Of Might Heart => Might Heart.
+	Soul Of Sight Heart => Sight Heart.
+	Renamed "Eye of Cthulu" to "Eye of Cthuhlu".
+	Renamed "Brain of Cthulu" to "Brain of Cthuhlu".
+
 1.53
 	Journey Mode code.
 1.52
