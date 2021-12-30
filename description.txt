@@ -13,7 +13,7 @@ Also Note: The recipe browser shows "Tree" for the crafting station to make the 
 
 Changelog:
 
-1.6
+1.60
 	Life Crystal Heart - Dedicated to AdamChromeE! Thank you for making a mod review!
 	Code Cleanup.
 	Names which used to be like: "Eye Of Cthulu", is now: "Eye of Cthulu".
@@ -29,14 +29,14 @@ Changelog:
 	Fix description.
 1.51
 	Code Formatting.
-1.5
+1.50
 	Boss hearts implemented.
 		(+21 hearts)
 	Rewrote the saving and loading code.
 		Player data doesn't get reset after every update/reload anymore! :)
 			This gives the .txt file in Appdata/Roaming less value, but I will keep it there incase something happens and the player wants to get back what they lost.
 
-1.4
+1.40
 	Hardmode hearts implemented.
 		(+30 hearts)
 	New optional info display (Similar to the cellphone), can be toggled in the config (Turned off by default).	
@@ -46,7 +46,7 @@ Changelog:
 	New settings in the config to allow you to disable/enable boss hearts or material hearts. 
 		(A use case for this can be for a modpack which likes the boss hearts feature but dont like the material hearts. Disabling material hearts ALSO disables their recipes. Disabled hearts are destroyed (sold) upon entering your inventory.)
 
-1.3
+1.30
 	Item tooltip now displays information depending on its usability.
 		[Max Consumed]: if config is untouched/set to default.
 		[Amount/Max]: if config set to higher than 1.
@@ -55,7 +55,7 @@ Changelog:
 	A new file gets created in AppData/Roaming every time you save the game, with info on which hearts you have consumed. This can be used incase something horrible happens to your save file and you need to add some things back.
 	Fix with the recycle crafting recipes, hearts that are crafted by only 1 item (Such as the enchanted heart) now return the full item when you craft back. It used to craft back into nothing, but the recipe would still be there.
 
-1.2
+1.20
 	Strong code Optimizations.
 	UI text demonstrating amount of potential HP earned, text doesnt show up if you can't consume another.
 	Reverse crafting recipes - All hearts can be extracted back into 80% of its material form, must be near an extractinator.
@@ -64,10 +64,10 @@ Changelog:
 	Mini shockwaves are released now opon consumption. If a heart gives +5 Max HP, theres 1. If a heart gives +25 Max HP, theres 5. You get the pattern.
 	Text is now determined by the rarity of the heart.
 
-1.1
+1.10
 	All pre-hardmode hearts finished.
 	First release on the mod browser.
 	(From here, I am going to make sure everything within the code and mod that I want is finished before comensing to Hardmode / Bosses. Im going to work on some UI etc.)
 
-1.0
+1.00
 	A complete rewrite of the old 1.3 classic. New repo, same mod. Drastically changing the codebase, incorporating a WAY more modular design with functionality and scalability in mind. Void of the numerous bugs that plagued the old mod, you guys know what I'm referencing.
