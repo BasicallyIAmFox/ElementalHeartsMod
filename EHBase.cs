@@ -78,7 +78,7 @@ namespace ElementalHeartsMod
             {
                 bonusHP = (this.rarity + 1) * 5;
             }
-            texturePath = pathPrefix + Regex.Replace(name, " ", string.Empty);
+            texturePath = pathPrefix + Regex.Replace((tag + " Heart"), " ", string.Empty);
 
 
             switch (this.rarity)
